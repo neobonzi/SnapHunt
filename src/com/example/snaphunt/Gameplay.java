@@ -16,7 +16,7 @@ public class Gameplay extends Activity {
 
 	ImageButton userPhotoButton;
 	ArrayList<ImageButton> playerPhotoButtons;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -33,7 +33,7 @@ public class Gameplay extends Activity {
 			playerPhotoButtons.add((ImageButton) findViewById(id));
 			photoButtonView.replace(Integer.toString(i), Integer.toString(++i));
 		}
-		
+
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -42,9 +42,30 @@ public class Gameplay extends Activity {
 		return true;
 	}
     public void startRoundSummary(View view) {
-        
+
         Intent intent = new Intent(this, RoundSummary.class);
         startActivity(intent);
     }
+
+//    @Override
+//
+//    protected void onActivityResult (int requestCode, int resultCode, Intent data) {
+//    	Log.d(Gameplay.class.getName(),"request Code: " + requestCode + ". ResultCode: "+ resultCode );
+//
+//
+//	    if(requestCode == PICTURE_REQUEST_CODE && resultCode == RESULT_OK){
+//
+//		    photo = (Bitmap) data.getExtras().get("data");
+//
+//		    if(photo != null){
+//
+//		    userPhotoButton.setAdjustViewBounds(true);
+//
+//		    userPhotoButton.setImageBitmap(photo);
+//
+//		    userPhotoButton.setBackgroundColor(Color.TRANSPARENT);
+//
+//	    }
+//    }
 
 }
