@@ -1,0 +1,81 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:id="@+id/welcome_scrollView"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:fillViewport="true">	
+
+	<LinearLayout 
+	    android:layout_width="match_parent"
+	    android:layout_height="0dp"
+	    android:background="@drawable/background"
+	    android:orientation="vertical"
+		android:focusable="true"
+		android:descendantFocusability="beforeDescendants"
+		android:focusableInTouchMode="true"
+		android:windowSoftInputMode="stateHidden" >
+	<RelativeLayout 
+   	    android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" >
+       	   <ImageView
+     	    android:contentDescription="@string/logo_description"
+	        android:id="@+id/snapHuntLogo"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+	        android:src="@drawable/ic_launcher" />
+	</RelativeLayout>
+	
+	<RelativeLayout 
+   	    android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        				android:layout_marginLeft="30dp"
+		        android:layout_marginRight="30dp" >
+        
+		    <EditText
+		        android:id="@+id/theme_picker_theme"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_centerVertical="true"
+		        android:layout_margin="15dp"
+		        android:background="@color/text_background"
+		        android:ems="10"
+		        android:hint="@string/theme_picker_hint"
+		        android:inputType="textMultiLine"
+		        android:textColor="@color/grey_text"
+		        android:gravity="center" >
+
+		        <requestFocus />
+		    </EditText>
+		   	<TextView
+		        android:id="@+id/theme_picker_pick_theme"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+				android:layout_margin="5dp"
+		        android:text="@string/theme_picker_title"
+		        android:textColor="@color/grey_text"
+		        android:layout_above="@id/theme_picker_theme" />
+
+		    <Button
+		        android:id="@+id/theme_picker_submit_button"
+		        android:layout_width="match_parent"
+		        android:layout_height="match_parent"
+		        android:layout_below="@+id/theme_picker_theme"
+		        android:layout_centerHorizontal="true"
+		        android:layout_margin="5dp"
+		        android:background="@color/login_button_background"
+		        android:text="@string/theme_picker_submit_button"
+		        android:clickable="true"
+		        android:onClick="startJudgeGameplay" />
+
+		</RelativeLayout>
+	<RelativeLayout 
+   	    android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+	</LinearLayout>
+</ScrollView>

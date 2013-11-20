@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:baselineAligned="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:orientation="horizontal"
+    android:layout_margin="5dp"
+    android:background="@color/text_background">
+
+   	<RelativeLayout
+		android:layout_width="0dp"
+	   	android:layout_height="match_parent" 
+	   	android:background="@color/text_background"
+	   	android:layout_weight="1.2" >
+
+		<TextView
+		    android:id="@+id/gameveiw_timeleft"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:layout_centerHorizontal="true"
+		    android:layout_centerVertical="true"
+		    android:layout_margin="5dp"
+		    android:text="@string/gameview_timeleft"
+		    android:textColor="@color/grey_text" />
+
+	</RelativeLayout>
+	<RelativeLayout
+		android:layout_width="0dp"
+    	android:layout_height="match_parent" 
+    	android:background="@color/text_background"
+    	android:layout_weight="4" >
+    
+	    <TextView
+	        android:id="@+id/gameveiw_groupname"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_margin="5dp"
+	        android:layout_centerHorizontal="true"
+	        android:text="@string/gameview_groupname"
+	        android:textColor="@color/grey_text" />
+	
+	    <ImageView
+	        android:contentDescription="@string/gameview_player"
+	        android:id="@+id/gameview_player2"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@id/gameveiw_groupname"
+	        android:layout_centerHorizontal="true"
+	        
+	        android:layout_marginLeft="4dp"
+	        android:layout_marginRight="4dp"
+	        android:layout_marginBottom="5dp"
+	        android:src="@drawable/blank_head"
+	        android:background="@color/login_button_background" />
+	
+	    <ImageView
+	        android:contentDescription="@string/gameview_player"
+	        android:id="@+id/gameview_player1"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="4dp"
+	        android:layout_marginRight="4dp"
+	        android:layout_marginBottom="5dp"
+	        android:layout_alignTop="@id/gameview_player2"
+	        android:layout_toLeftOf="@id/gameview_player2"
+	        android:src="@drawable/blank_head"
+	        android:background="@color/login_button_background" />
+	
+	    <ImageView
+	        android:contentDescription="@string/gameview_player"
+	        android:id="@+id/gameview_player3"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_marginLeft="4dp"
+	        android:layout_marginRight="4dp"
+	        android:layout_marginBottom="5dp"
+	        android:layout_alignTop="@id/gameview_player2"
+	        android:layout_toRightOf="@id/gameview_player2"
+	        android:src="@drawable/blank_head"
+	        android:background="@color/login_button_background" />
+	</RelativeLayout>
+   	<RelativeLayout
+		android:layout_width="0dp"
+	   	android:layout_height="match_parent" 
+	   	android:background="@color/text_background"
+	   	android:layout_weight="2" >
+
+   		<TextView
+   		    android:id="@+id/gameview_current_theme"
+   		    android:layout_width="wrap_content"
+   		    android:layout_height="wrap_content"
+   		    android:layout_centerHorizontal="true"
+   		    android:layout_centerVertical="true"
+   		    android:text="@string/gameview_current_theme"
+   		    android:textColor="@color/grey_text" />
+
+	</RelativeLayout>
+
+</LinearLayout>

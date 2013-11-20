@@ -1,0 +1,155 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+		    android:id="@+id/register_scrollView"
+		    android:layout_width="match_parent"
+		    android:layout_height="match_parent"
+		    android:fillViewport="true"
+ >		
+	<LinearLayout 
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="vertical" 
+	    android:background="@drawable/background"
+    	android:focusable="true"
+	    android:descendantFocusability="beforeDescendants"
+		android:focusableInTouchMode="true"
+	    android:windowSoftInputMode="stateHidden" >
+	
+	    <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="0.5" >
+	     	<ImageView
+	     	    android:contentDescription="@string/logo_description"
+		        android:id="@+id/snapHuntLogo"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true"
+		        android:src="@drawable/ic_launcher" />
+	        
+	    </RelativeLayout>
+	
+	    <RelativeLayout
+	        android:layout_width="match_parent"
+	        android:layout_height="0dp"
+	        android:layout_weight="1" >
+			
+			<TextView
+	            android:id="@+id/registerTitle"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:text="@string/register_title"
+	            android:textColor="@color/grey_text"
+	            android:textAllCaps="true"
+	            android:textStyle="bold"
+	            android:textSize="20sp"
+	            android:layout_marginLeft="25dp"
+	            android:layout_marginTop="25dp"
+	            android:layout_marginBottom="40dp" />
+			
+	        <EditText
+	            android:id="@+id/registerUsername"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true"
+	            android:layout_marginRight="40dp"
+	            android:layout_marginLeft="40dp"
+				android:layout_marginTop="5dp"  
+				android:paddingLeft="5dp"       
+	            android:inputType="text"
+	            android:layout_below="@id/registerTitle"
+	            android:textCursorDrawable="@null"
+	    		android:textColor="@color/grey_text"
+	            android:background="@color/text_background"
+	            android:hint="@string/register_username" >
+	        </EditText>
+	
+	        <EditText
+	            android:id="@+id/registerPassword"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/registerUsername"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true"
+				android:layout_marginRight="40dp"
+	            android:layout_marginLeft="40dp"
+				android:layout_marginTop="10dp"  
+				android:paddingLeft="5dp"
+	            android:inputType="textPassword"
+	            android:textCursorDrawable="@null"
+	    		android:textColor="@color/grey_text"
+	            android:background="@color/text_background"
+	            android:hint="@string/register_password"  />
+	         <EditText
+	            android:id="@+id/registerVerifyPassword"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/registerPassword"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true"
+				android:layout_marginRight="40dp"
+	            android:layout_marginLeft="40dp"
+				android:layout_marginTop="10dp"  
+				android:paddingLeft="5dp"
+	            android:inputType="textPassword"
+	            android:textCursorDrawable="@null"
+	    		android:textColor="@color/grey_text"
+	            android:background="@color/text_background"
+	            android:hint="@string/register_verify_password"  />
+	       <ImageView
+	     	    android:contentDescription="@string/password_verification"
+		        android:id="@+id/password_verification"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:src="@drawable/red_x"
+		        android:visibility="invisible"
+		        android:layout_margin="1dp"
+		        android:layout_alignBottom="@id/registerVerifyPassword"
+		        android:layout_alignRight="@id/registerVerifyPassword"
+		        android:alpha="0.9"
+		         />
+	        <EditText
+	            android:id="@+id/registerEmail"
+	            android:layout_width="match_parent"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@id/registerVerifyPassword"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="true"
+				android:layout_marginRight="40dp"
+	            android:layout_marginLeft="40dp"
+				android:layout_marginTop="10dp"  
+				android:paddingLeft="5dp"
+	            android:inputType="textEmailAddress"
+	            android:textCursorDrawable="@null"
+	    		android:textColor="@color/grey_text"
+	            android:background="@color/text_background"
+	            android:hint="@string/register_email"  />
+	        
+	        <Button
+	            android:id="@+id/registerButton"
+	            android:layout_width="match_parent"
+	            android:layout_height="match_parent"
+	            android:layout_centerHorizontal="true"
+				android:layout_marginRight="40dp"
+	            android:layout_marginLeft="40dp"
+				android:layout_marginTop="20dp"  
+				android:layout_marginBottom="15dp"
+				android:layout_alignParentBottom="true"
+	            android:layout_below="@id/registerEmail"
+	            android:background="@color/login_button_background"
+	            android:textStyle="bold"
+	    		android:textColor="@color/grey_text"
+	            android:text="@string/register_button_text"
+	            android:clickable="true"
+	            android:onClick="startGamesOverview"
+				 />
+	     	
+	    </RelativeLayout>
+	
+	
+	  
+	
+	
+	</LinearLayout>
+	</ScrollView>
