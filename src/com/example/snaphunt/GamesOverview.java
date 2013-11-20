@@ -1,5 +1,17 @@
 package com.example.snaphunt;
 
+import java.util.ArrayList;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -10,35 +22,30 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
-	
+
 
 public class GamesOverview extends Activity {
-	
+
 	protected LinearLayout gameView;
-	 
-	
+	protected int uid;
+	protected RequestQueue queue;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_games_overview);
 		View jokeView = new View(this.getBaseContext());
-		View jokeView1 = new View(this.getBaseContext());
-		View jokeView2 = new View(this.getBaseContext());
-		View jokeView3 = new View(this.getBaseContext());
-		View jokeView4 = new View(this.getBaseContext());
-		
-		
-
 		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
-		jokeView1.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
-		jokeView2.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
-		jokeView3.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
-		jokeView4.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
+
+		Intent intent = getIntent();
+		uid = intent.getIntExtra("uid", -1);
+		queue = Volley.newRequestQueue(this);
+		getPlayerGameId(uid);
 
 		gameView = (LinearLayout) findViewById(R.id.games_overvew_games_list);
 		gameView.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View arg0) {
 				Log.d("SnapHunt_GamesOverview","view clicked "+ arg0.getId());
@@ -49,15 +56,69 @@ public class GamesOverview extends Activity {
 		});
 	}
 
+	private void startGamesOverview(int gameId) {
+		Intent intent = new Intent(getBaseContext(), Gameplay.class);
+		intent.putExtra("uid", uid);
+		intent.putExtra("gameId", gameId);
+	}
+
+	private void judgeCheck(int gameId) {
+		String url = "http://75.128.20.108/snapAPI/checkIfJudge.php?uid="+uid+"&gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							judgeCheck(Integer.parseInt((String)response.get("id")));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
+	private void getPlayerGameId(int uid) {
+		String url = "http://75.128.20.108/snapAPI/getPlayerGameId.php?id="+uid;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							judgeCheck(Integer.parseInt((String)response.get("id")));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.games_overview, menu);
 		return true;
 	}
-	
+
     public void startCreateGame(View view) {
-        
+
         Intent intent = new Intent(this, CreateGame.class);
         startActivity(intent);
     }

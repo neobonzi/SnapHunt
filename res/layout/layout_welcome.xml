@@ -2,17 +2,17 @@
 		    android:id="@+id/welcome_scrollView"
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
-		    android:fillViewport="true">	
-	<LinearLayout 
+		    android:fillViewport="true">
+	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical" 
+	    android:orientation="vertical"
 	    android:background="@drawable/background"
 		android:focusable="true"
 		android:descendantFocusability="beforeDescendants"
 		android:focusableInTouchMode="true"
 		android:windowSoftInputMode="stateHidden" >
-	
+
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
@@ -25,14 +25,14 @@
 		        android:layout_centerHorizontal="true"
 	            android:layout_centerVertical="true"
 		        android:src="@drawable/ic_launcher" />
-	        
+
 	    </RelativeLayout>
 
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight="1" >
-		    
+
 		    <EditText
 	            android:id="@+id/loginPassword"
 	            android:layout_width="match_parent"
@@ -41,7 +41,7 @@
 	            android:layout_centerVertical="true"
 				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="5dp"  
+				android:layout_marginTop="5dp"
 				android:paddingLeft="5dp"
 	            android:inputType="textPassword"
 	            android:textCursorDrawable="@null"
@@ -49,7 +49,7 @@
 	            android:background="@color/text_background"
 	            android:hint="@string/password_text"
 	            android:layout_alignParentBottom="true"  />
-	
+
 	        <EditText
 	            android:id="@+id/loginUsername"
 	            android:layout_width="match_parent"
@@ -58,21 +58,21 @@
 	            android:layout_centerVertical="true"
 	            android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="5dp"  
-				android:paddingLeft="5dp"       
+				android:layout_marginTop="5dp"
+				android:paddingLeft="5dp"
 	            android:inputType="text"
 	            android:textCursorDrawable="@null"
 	    		android:textColor="@color/grey_text"
 	            android:background="@color/text_background"
 	            android:hint="@string/login_text"
 	            android:layout_above="@id/loginPassword"
-	            
+
 	             >
 		        </EditText>
-	
 
 
-	     	
+
+
 	    </RelativeLayout>
 		   	<RelativeLayout
 	        android:layout_width="match_parent"
@@ -85,20 +85,19 @@
 	            android:layout_centerHorizontal="true"
 				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="15dp"  
+				android:layout_marginTop="15dp"
 	            android:background="@color/login_button_background"
 	            android:textStyle="bold"
 	    		android:textColor="@color/grey_text"
 	            android:text="@string/login_button_text"
 	            android:clickable="true"
-	            android:onClick="startGamesOverview"
 				 />
 		 </RelativeLayout>
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight="0.75" >
-	
+
 	        <TextView
 	            android:id="@+id/loginRegister"
 	            android:layout_width="wrap_content"
@@ -113,11 +112,11 @@
 	            android:paddingLeft="15dp"
 	            android:paddingRight="15dp"
 	            android:layout_marginBottom="20dp" />
-	
+
 	    </RelativeLayout>
-	
-	  
-	
-	
+
+
+
+
 	</LinearLayout>
 	</ScrollView>
