@@ -230,26 +230,26 @@ public class Gameplay extends Activity {
 
 			if(requestCode == PICTURE_REQUEST_CODE && resultCode == RESULT_OK){
 					assert(imageFileUri != null);
-					
+
 					String response = "";
 					HttpUploader uploader = new HttpUploader();
 					try {
-					  response = uploader.execute(imageFileUri.getPath()).get();        
+					  response = uploader.execute(imageFileUri.getPath()).get();
 					} catch (InterruptedException e) {
 					  e.printStackTrace();
 					} catch (ExecutionException e) {
 					  e.printStackTrace();
 					}
-					
+
 					Log.d(Gameplay.class.getName(),"response- " + response);
-					
+
 					Bitmap photo = BitmapFactory.decodeFile(imageFileUri.getPath());
-					
+
 					double width = photo.getWidth();
 	                double height = photo.getHeight();
 	                double ratio = 640/width;
 	                int newHeight = (int)(ratio*height);
-					
+
 
 					scaledPhoto = Bitmap.createScaledBitmap(photo, 640, newHeight, false);
 						if(photo != null){
@@ -261,8 +261,8 @@ public class Gameplay extends Activity {
 						userPhotoButton.setImageBitmap(scaledPhoto);
 						userPhotoButton.setBackgroundColor(Color.TRANSPARENT);
 					}
-					
-	                
+
+
 			}
 	}
 
