@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -72,6 +73,8 @@ public class RoundSummary extends Activity {
 	        @Override
 	        public void onResponse(Bitmap response) {
 	        	pic2.setImageBitmap(response);
+	        	pic2.setAdjustViewBounds(true);
+	        	pic2.setBackgroundColor(Color.TRANSPARENT);
 	        }
 	    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
 	        @Override
@@ -89,6 +92,8 @@ public class RoundSummary extends Activity {
 	        @Override
 	        public void onResponse(Bitmap response) {
 	        	pic1.setImageBitmap(response);
+	        	pic1.setAdjustViewBounds(true);
+	        	pic1.setBackgroundColor(Color.TRANSPARENT);
 	        }
 	    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
 	        @Override
@@ -105,6 +110,8 @@ public class RoundSummary extends Activity {
 	        @Override
 	        public void onResponse(Bitmap response) {
 	        	winPic.setImageBitmap(response);
+	        	winPic.setAdjustViewBounds(true);
+	        	winPic.setBackgroundColor(Color.TRANSPARENT);
 	        }
 	    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
 	        @Override

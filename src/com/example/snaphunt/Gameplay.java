@@ -28,6 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
@@ -103,6 +104,8 @@ public class Gameplay extends Activity {
 	        public void onResponse(Bitmap response) {
 	        	ImageButton playerActivePhoto = (ImageButton)findViewById(R.id.gameplay_user_photo_button);
 	        	playerActivePhoto.setImageBitmap(response);
+	        	playerActivePhoto.setAdjustViewBounds(true);
+	        	playerActivePhoto.setBackgroundColor(Color.TRANSPARENT);
 	        }
 	    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
 	        @Override
@@ -121,6 +124,8 @@ public class Gameplay extends Activity {
 	        public void onResponse(Bitmap response) {
 	        	ImageButton player1Photo = (ImageButton)findViewById(R.id.gameplay_player1);
 	        	player1Photo.setImageBitmap(response);
+	        	player1Photo.setAdjustViewBounds(true);
+	        	player1Photo.setBackgroundColor(Color.TRANSPARENT);
 	        }
 	    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
 	        @Override
@@ -139,6 +144,8 @@ public class Gameplay extends Activity {
 	        public void onResponse(Bitmap response) {
 	        	ImageButton player2Photo = (ImageButton)findViewById(R.id.gameplay_player2);
 	        	player2Photo.setImageBitmap(response);
+	        	player2Photo.setAdjustViewBounds(true);
+	        	player2Photo.setBackgroundColor(Color.TRANSPARENT);
 	        }
 	    }, 0, 0, Bitmap.Config.ARGB_8888, new Response.ErrorListener() {
 	        @Override
@@ -232,7 +239,7 @@ public class Gameplay extends Activity {
 					assert(imageFileUri != null);
 
 					String response = "";
-					HttpUploader uploader = new HttpUploader();
+					HttpUploader uploader = new Gameplay.HttpUploader();
 					try {
 					  response = uploader.execute(imageFileUri.getPath()).get();
 					} catch (InterruptedException e) {
@@ -294,5 +301,59 @@ public class Gameplay extends Activity {
 
 		return mediaFile;
 	}
+
+	public class HttpUploader extends AsyncTask<String, Void, String>{
+		String output = null;
+		@Override
+		protected String doInBackground(String... path) {
+
+	        for (String sdPath : path) {
+
+
+	        Bitmap photo = BitmapFactory.decodeFile(sdPath);
+	        ByteArrayOutputStream bao = new ByteArrayOutputStream();
+
+	        //Resize the image
+	        double width = photo.getWidth();
+	        double height = photo.getHeight();
+	        double ratio = 640/width;
+	        int newheight = (int)(ratio*height);
+
+	        photo = Bitmap.createScaledBitmap(photo, 640, newheight, true);
+
+			photo.compress(Bitmap.CompressFormat.JPEG, 95, bao);
+	        byte[] ba = bao.toByteArray();
+	        String ba1 = Base64.encodeToString(ba, Base64.DEFAULT);
+
+	        Log.d(Gameplay.class.getName(), "uploading image--- " + ba1);
+
+
+	        ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+	        nameValuePairs.add(new BasicNameValuePair("image",ba1) );
+
+	        try {
+	            HttpClient httpclient = new DefaultHttpClient();
+	            HttpPost httppost = new HttpPost("http://75.128.20.108/SnapAPI/uploadPicById.php?uid="+uid+"&gameId="+gameId);
+	            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+	            HttpResponse response = httpclient.execute(httppost);
+	            HttpEntity entity = response.getEntity();
+
+	            // print response
+	            String outPut = EntityUtils.toString(entity);
+	            Log.i(Gameplay.class.getName(),"Server response- " + outPut);
+
+	            photo.recycle();
+
+	        } catch (Exception e) {
+	            Log.d(Gameplay.class.getName(), "Error in http connection " + e.toString());
+	            e.printStackTrace();
+	        }
+		}
+			return output;
+		}
+
+	}
+
 
 }
