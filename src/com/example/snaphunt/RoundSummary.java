@@ -55,7 +55,6 @@ public class RoundSummary extends Activity {
 		boolean player1Set = false;
 		for(Integer anId : playerIds) {
 			if(anId.equals(winnerId)) {
-				player1Set = true;
 				setPlayerImageWinner(anId);
 			}else if(!player1Set) {
 				player1Set = true;

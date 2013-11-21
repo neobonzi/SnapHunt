@@ -19,6 +19,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
@@ -34,7 +35,9 @@ public class Welcome extends Activity {
 	String APIPath = "snapAPI/";
 	String scriptPath = ServerRoot + APIPath;
 	URL basePath;
+	int gameId;
 	Integer uid;
+	boolean isJudge = true;
 	RequestQueue queue;
 
 	EditText m_username;
@@ -70,6 +73,117 @@ public class Welcome extends Activity {
         startActivity(intent);
     }
 
+    public void routeJudge() {
+    	isJudge = true;
+    	winnerPickedCheck();
+    }
+
+    public void routePlayer() {
+    	isJudge = false;
+    	winnerPickedCheck();
+    }
+
+    public void routeUser(Integer uid) {
+    	this.uid = uid;
+    	getPlayerGameId();
+    }
+
+    public void winnerPickedCheck() {
+    	String url = "http://75.128.20.108/snapAPI/checkJudgePicked.php?gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							Boolean judgePicked = response.getBoolean("picked");
+							if(judgePicked){
+								Intent intent = new Intent(getBaseContext(), RoundSummary.class);
+								intent.putExtra("uid", uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							} else if (isJudge) {
+								Intent intent = new Intent(getBaseContext(), GameplayJudge.class);
+								intent.putExtra("uid", uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							} else {
+								Intent intent = new Intent(getBaseContext(), Gameplay.class);
+								intent.putExtra("uid", uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							}
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+    }
+
+    private void judgeCheck(int gameId) {
+		String url = "http://75.128.20.108/snapAPI/checkIfJudge.php?uid="+uid+"&gameId="+gameId;
+		this.gameId = gameId;
+		Toast.makeText(this, "Checking if judge", Toast.LENGTH_SHORT).show();
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							Boolean isJudge = response.getBoolean("isJudge");
+							if(isJudge){
+								routeJudge();
+							} else {
+								routePlayer();
+							}
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
+	private void getPlayerGameId() {
+		Toast.makeText(this, "Trying to get player game id", Toast.LENGTH_SHORT).show();
+		String url = "http://75.128.20.108/snapAPI/getPlayerGameId.php?id="+uid;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							judgeCheck(Integer.parseInt((String)response.get("id")));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
     /* Returns the userid given a username and password */
     public void login(String username, String password) {
     	String url = scriptPath+"login.php?username="+username+"&password="+password;
@@ -77,10 +191,8 @@ public class Welcome extends Activity {
 				new Response.Listener<JSONObject>() {
 					@Override
 					public void onResponse(JSONObject response) {
-						Intent intent = new Intent(getBaseContext(), GamesOverview.class);
 						try {
-							intent.putExtra("uid", Integer.parseInt((String)response.get("id")));
-							startActivity(intent);
+							routeUser(Integer.parseInt((String)response.get("id")));
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}

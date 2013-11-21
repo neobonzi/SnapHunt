@@ -42,7 +42,6 @@ public class GamesOverview extends Activity {
 		Intent intent = getIntent();
 		uid = intent.getIntExtra("uid", -1);
 		queue = Volley.newRequestQueue(this);
-		getPlayerGameId(uid);
 		gameView = (LinearLayout) findViewById(R.id.games_overvew_games_list);
 		gameView.setOnClickListener(new OnClickListener() {
 
@@ -72,65 +71,10 @@ public class GamesOverview extends Activity {
 		}
 	}
 
-	private void judgeCheck(int gameId) {
-		String url = "http://75.128.20.108/snapAPI/checkIfJudge.php?uid="+uid+"&gameId="+gameId;
-		this.gameId = gameId;
-		Toast.makeText(this, "Checking if judge", Toast.LENGTH_SHORT).show();
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-				new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						try {
-							Boolean isJudge = response.getBoolean("isJudge");
-							if(isJudge){
-								launchNextActivity(true);
-							} else {
-								launchNextActivity(false);
-							}
-						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					public void onErrorResponse(VolleyError error) {
-						Log.e("error",error.toString());
-					}
-				});
-		queue.add(jsObjRequest);
-	}
-
 	private void setGameId(int gameId) {
 		this.gameId = gameId;
 	}
 
-	private void getPlayerGameId(int uid) {
-		Toast.makeText(this, "Trying to get player game id", Toast.LENGTH_SHORT).show();
-		String url = "http://75.128.20.108/snapAPI/getPlayerGameId.php?id="+uid;
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-				new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						try {
-							judgeCheck(Integer.parseInt((String)response.get("id")));
-						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					public void onErrorResponse(VolleyError error) {
-						Log.e("error",error.toString());
-					}
-				});
-		queue.add(jsObjRequest);
-	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
