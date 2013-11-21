@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-<gradient
-    android:startColor="#3CE7F0"
-    android:endColor="#30F7F0"
-    android:gradientRadius="326"
-    android:type="radial"/>
-</shape>
+<bitmap
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:src="@drawable/sh_bg"
+    android:antialias="false"
+    android:dither="false" />

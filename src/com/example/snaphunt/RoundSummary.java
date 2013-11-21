@@ -22,7 +22,10 @@ import android.graphics.Color;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class RoundSummary extends Activity {
@@ -30,6 +33,8 @@ public class RoundSummary extends Activity {
 	ImageButton winPic;
 	ImageButton pic1;
 	ImageButton pic2;
+	Button contBtn;
+	TextView themeField;
 	private int uid;
 	private int gameId;
 	ArrayList<Integer> playerIds;
@@ -39,6 +44,7 @@ public class RoundSummary extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_round_summary);
+		themeField = ((TextView)findViewById(R.id.round_summary_theme));
 		Intent intent = getIntent();
 		uid = intent.getIntExtra("uid", -1);
 		gameId = intent.getIntExtra("gameId", -1);
@@ -46,7 +52,78 @@ public class RoundSummary extends Activity {
 		pic1 = (ImageButton)findViewById(R.id.round_summary_player1);
 		pic2 = (ImageButton)findViewById(R.id.round_summary_player2);
 		winPic = (ImageButton)findViewById(R.id.round_summary_winner);
+		contBtn= ((Button)findViewById(R.id.round_summary_done_button));
+		contBtn.setOnClickListener(new OnClickListener(){
+			@Override
+			public void onClick(View arg0) {
+				contPressed();
+			}
+		});
+
 		findPlayersByGameId();
+		setTheme();
+	}
+
+	private void updateTheme(String theme) {
+		themeField.setText(theme);
+	}
+
+	private void setTheme() {
+		/* First get all player ids who have submitted and are not judges */
+		String url = "http://75.128.20.108/snapAPI/getTheme.php?gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							updateTheme(response.getString("theme"));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
+	private void notifyWaiting() {
+		Toast.makeText(this, "Waiting for all players to be ready", Toast.LENGTH_SHORT).show();
+	}
+
+	private void contPressed() {
+		String url = "http://75.128.20.108/SnapAPI/contPressed.php?gameId="+gameId+"&uid="+uid;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							boolean restart = response.getBoolean("restart");
+							if(restart) {
+								initNextRound();
+							} else {
+								notifyWaiting();
+							}
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
 	}
 
 
@@ -122,6 +199,37 @@ public class RoundSummary extends Activity {
 		queue.add(jsImgRequest);
 	}
 
+	private void initNextRound() {
+		String url = "http://75.128.20.108/snapAPI/resetRound.php?&gameId="+gameId+"&uid="+uid;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							boolean isJudge = response.getBoolean("isJudge");
+							if(isJudge) {
+								Intent intent = new Intent(getBaseContext(), GameplayJudge.class);
+								intent.putExtra("uid",uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							}else {
+								Intent intent = new Intent(getBaseContext(), Gameplay.class);
+								intent.putExtra("uid",uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							}
+						} catch (JSONException e) {
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
 	private void getWinner(ArrayList<Integer> playerIds) {
 		this.playerIds = playerIds;
 		/* First get all player ids who have submitted and are not judges */
@@ -131,19 +239,15 @@ public class RoundSummary extends Activity {
 					@Override
 					public void onResponse(JSONObject response) {
 						try {
-							Integer judgeChoice = Integer.parseInt((String)response.get("judgeChoice"));
-							setImages(judgeChoice);
-						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+							Integer winner = response.getInt("judgeChoice");
+							setImages(winner);
 						} catch (JSONException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
 					}
 				}, new Response.ErrorListener() {
 					public void onErrorResponse(VolleyError error) {
-						Log.e("error",error.toString());
+						Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
 					}
 				});
 		queue.add(jsObjRequest);

@@ -25,13 +25,14 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ImageButton;
-import android.widget.Toast;
+import android.widget.TextView;
 
 public class GameplayJudge extends Activity {
 	private int uid;
 	private int gameId;
 	private RequestQueue queue;
 	private ImageLoader imageLoader;
+	private TextView themeField;
 	private HashMap<Integer,Integer> idsToPics;
 	private Integer judgePick;
 
@@ -39,6 +40,7 @@ public class GameplayJudge extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_gameplay_judge);
+		themeField = ((TextView)findViewById(R.id.gameplay_judge_current_theme));
 		idsToPics = new HashMap<Integer,Integer>();
 		setListeners();
 		Intent intent = getIntent();
@@ -46,9 +48,37 @@ public class GameplayJudge extends Activity {
 		uid = intent.getIntExtra("uid", -1);
 		gameId = intent.getIntExtra("gameId", -1);
 		queue = Volley.newRequestQueue(this);
+		setTheme();
 		findPlayersSubmittedNotJudges();
 	}
+	private void updateTheme(String theme) {
+		themeField.setText(theme);
+	}
 
+	private void setTheme() {
+		/* First get all player ids who have submitted and are not judges */
+		String url = "http://75.128.20.108/snapAPI/getTheme.php?gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							updateTheme(response.getString("theme"));
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
 	private void setListeners() {
 		ImageButton player1pic = (ImageButton)findViewById(R.id.gameplay_judge_player1);
 		ImageButton player2pic = (ImageButton)findViewById(R.id.gameplay_judge_player2);
@@ -100,7 +130,6 @@ public class GameplayJudge extends Activity {
 	}
 
 	private void setImagesForPlayers(ArrayList<Integer> submittedIds) {
-		Toast.makeText(this, "Setting images for all players", Toast.LENGTH_SHORT).show();
 		/* Remove current user */
 		boolean player1Set = false;
 		boolean player2Set = false;
@@ -122,7 +151,6 @@ public class GameplayJudge extends Activity {
 
 	private void setPlayerImage3(Integer playerId) {
 		String url = "http://75.128.20.108/SnapAPI/getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
-		Toast.makeText(this, "Retreiving image for player" + playerId, Toast.LENGTH_SHORT).show();
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
@@ -140,7 +168,6 @@ public class GameplayJudge extends Activity {
 
 	private void setPlayerImage1(Integer playerId) {
 		String url = "http://75.128.20.108/SnapAPI/getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
-		Toast.makeText(this, "Retreiving image for player" + playerId, Toast.LENGTH_SHORT).show();
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
@@ -158,7 +185,6 @@ public class GameplayJudge extends Activity {
 
 	private void setPlayerImage2(Integer playerId) {
 		String url = "http://75.128.20.108/SnapAPI/getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
-		Toast.makeText(this, "Retreiving image for player" + playerId, Toast.LENGTH_SHORT).show();
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
@@ -175,10 +201,8 @@ public class GameplayJudge extends Activity {
 	}
 
 	private void findPlayersSubmittedNotJudges() {
-		Toast.makeText(this, "Getting player status", Toast.LENGTH_SHORT);
 		/* First get all player ids who have submitted and are not judges */
 		String url = "http://75.128.20.108/snapAPI/getPlayerSubmitted.php?&gameId="+gameId;
-		Toast.makeText(this, "Checking if judge", Toast.LENGTH_SHORT).show();
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override

@@ -2,29 +2,42 @@
 		    android:id="@+id/welcome_scrollView"
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
-		    android:fillViewport="true">
+		    android:fillViewport="true"
+		    >
+
 	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical"
+	    android:descendantFocusability="beforeDescendants"
 	    android:background="@drawable/background"
-		android:focusable="true"
-		android:descendantFocusability="beforeDescendants"
-		android:focusableInTouchMode="true"
-		android:windowSoftInputMode="stateHidden" >
+	    android:focusable="true"
+	    android:focusableInTouchMode="true"
+	    android:orientation="vertical"
+	    android:windowSoftInputMode="stateHidden" >
 
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
-	        android:layout_weight="1" >
+	        android:layout_weight="1.5" >
+
 	     	<ImageView
+	     	    android:id="@+id/snapHuntLogo"
+	     	    android:layout_width="wrap_content"
+	     	    android:layout_height="wrap_content"
+	     	    android:layout_centerHorizontal="true"
+	     	    android:layout_centerVertical="true"
+	     	    android:alpha=".5"
 	     	    android:contentDescription="@string/logo_description"
-		        android:id="@+id/snapHuntLogo"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_centerHorizontal="true"
-	            android:layout_centerVertical="true"
-		        android:src="@drawable/ic_launcher" />
+	     	    android:src="@drawable/ic_snaphunt_logo" />
+
+			<ImageView
+			    android:id="@+id/SnapHuntTitleLogo"
+			    android:layout_width="wrap_content"
+			    android:layout_height="wrap_content"
+			    android:layout_below="@+id/snapHuntLogo"
+			    android:layout_centerHorizontal="true"
+			    android:layout_marginTop="22dp"
+			    android:src="@drawable/shtitle"/>
 
 	    </RelativeLayout>
 
@@ -91,6 +104,7 @@
 	    		android:textColor="@color/grey_text"
 	            android:text="@string/login_button_text"
 	            android:clickable="true"
+
 				 />
 		 </RelativeLayout>
 	    <RelativeLayout

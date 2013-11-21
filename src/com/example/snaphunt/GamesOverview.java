@@ -22,7 +22,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 
 
@@ -57,7 +56,6 @@ public class GamesOverview extends Activity {
 
 	private void launchNextActivity(boolean isJudge) {
 		Intent intent;
-		Toast.makeText(this, "launching next activity", Toast.LENGTH_SHORT).show();
 		if(isJudge) {
 			intent = new Intent(getBaseContext(), GameplayJudge.class);
 			intent.putExtra("uid", uid);

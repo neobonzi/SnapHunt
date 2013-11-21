@@ -2,6 +2,6 @@
 
     <color name="black_overlay">#66000000</color>
 	<color name="text_background">#afeaeaea</color>
-	<color name="login_button_background">#ffdbd3bc</color>
+	<color name="login_button_background">#ffFFE0AB</color>
 	<color name="grey_text">#3a3a39</color>
 </resources>

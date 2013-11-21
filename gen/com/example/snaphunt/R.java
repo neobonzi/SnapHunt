@@ -40,13 +40,17 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int blank_head=0x7f020002;
         public static final int ic_camera=0x7f020003;
         public static final int ic_launcher=0x7f020004;
-        public static final int orange_checkmark=0x7f020005;
-        public static final int questionmark=0x7f020006;
-        public static final int red_x=0x7f020007;
-        public static final int ribbon=0x7f020008;
+        public static final int ic_snaphunt_logo=0x7f020005;
+        public static final int orange_checkmark=0x7f020006;
+        public static final int questionmark=0x7f020007;
+        public static final int red_x=0x7f020008;
+        public static final int ribbon=0x7f020009;
+        public static final int sh_bg=0x7f02000a;
+        public static final int shtitle=0x7f02000b;
     }
     public static final class id {
-        public static final int action_settings=0x7f090044;
+        public static final int SnapHuntTitleLogo=0x7f090040;
+        public static final int action_settings=0x7f090045;
         public static final int create_game_enter_username=0x7f090008;
         public static final int create_game_group_name=0x7f090001;
         public static final int create_game_group_name_text=0x7f090002;
@@ -92,10 +96,10 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int gameview_player1=0x7f09002b;
         public static final int gameview_player2=0x7f09002a;
         public static final int gameview_player3=0x7f09002c;
-        public static final int loginButton=0x7f090042;
-        public static final int loginPassword=0x7f090040;
-        public static final int loginRegister=0x7f090043;
-        public static final int loginUsername=0x7f090041;
+        public static final int loginButton=0x7f090043;
+        public static final int loginPassword=0x7f090041;
+        public static final int loginRegister=0x7f090044;
+        public static final int loginUsername=0x7f090042;
         public static final int password_verification=0x7f090034;
         public static final int registerButton=0x7f090036;
         public static final int registerEmail=0x7f090035;
@@ -181,6 +185,8 @@ or to a theme attribute in the form "<code>?[<i>package</i>:][<i>type</i>:]<i>na
         public static final int register_verify_password=0x7f06000a;
         public static final int registration=0x7f060001;
         public static final int round_summary_done_button=0x7f060035;
+        public static final int snap_hunt_HUNT=0x7f060037;
+        public static final int snap_hunt_SNAP=0x7f060036;
         public static final int theme_picker_hint=0x7f06002f;
         public static final int theme_picker_submit_button=0x7f060030;
         public static final int theme_picker_title=0x7f06002e;

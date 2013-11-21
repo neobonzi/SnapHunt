@@ -131,7 +131,6 @@ public class Welcome extends Activity {
     private void judgeCheck(int gameId) {
 		String url = "http://75.128.20.108/snapAPI/checkIfJudge.php?uid="+uid+"&gameId="+gameId;
 		this.gameId = gameId;
-		Toast.makeText(this, "Checking if judge", Toast.LENGTH_SHORT).show();
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -160,7 +159,6 @@ public class Welcome extends Activity {
 	}
 
 	private void getPlayerGameId() {
-		Toast.makeText(this, "Trying to get player game id", Toast.LENGTH_SHORT).show();
 		String url = "http://75.128.20.108/snapAPI/getPlayerGameId.php?id="+uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
