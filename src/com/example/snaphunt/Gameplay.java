@@ -1,8 +1,19 @@
 package com.example.snaphunt;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.util.EntityUtils;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +38,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.View;
@@ -40,6 +52,7 @@ public class Gameplay extends Activity {
 
 	ImageButton userPhotoButton;
 	ArrayList<ImageButton> playerPhotoButtons;
+    ByteArrayOutputStream bao = new ByteArrayOutputStream();
 	private int uid;
 	private static final int PICTURE_REQUEST_CODE = 1;
 	private int gameId;
@@ -217,9 +230,28 @@ public class Gameplay extends Activity {
 
 			if(requestCode == PICTURE_REQUEST_CODE && resultCode == RESULT_OK){
 					assert(imageFileUri != null);
+					
+					String response = "";
+					HttpUploader uploader = new HttpUploader();
+					try {
+					  response = uploader.execute(imageFileUri.getPath()).get();        
+					} catch (InterruptedException e) {
+					  e.printStackTrace();
+					} catch (ExecutionException e) {
+					  e.printStackTrace();
+					}
+					
+					Log.d(Gameplay.class.getName(),"response- " + response);
+					
+					Bitmap photo = BitmapFactory.decodeFile(imageFileUri.getPath());
+					
+					double width = photo.getWidth();
+	                double height = photo.getHeight();
+	                double ratio = 640/width;
+	                int newHeight = (int)(ratio*height);
+					
 
-						Bitmap photo = BitmapFactory.decodeFile(imageFileUri.getPath());
-						scaledPhoto = Bitmap.createScaledBitmap(photo, 640, 480, false);
+					scaledPhoto = Bitmap.createScaledBitmap(photo, 640, newHeight, false);
 						if(photo != null){
 							photo.recycle();
 						}
@@ -229,11 +261,13 @@ public class Gameplay extends Activity {
 						userPhotoButton.setImageBitmap(scaledPhoto);
 						userPhotoButton.setBackgroundColor(Color.TRANSPARENT);
 					}
-
+					
+	                
 			}
 	}
 
-    private Uri getOutputMediaFileUri(){
+
+	private Uri getOutputMediaFileUri(){
 
 		File file = getOutputMediaFile(this);
 		return Uri.fromFile(file);
