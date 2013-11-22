@@ -41,7 +41,7 @@
 		        android:layout_centerHorizontal="true"
 		        android:layout_centerVertical="true"
 		        android:layout_margin="15dp"
-		        android:background="@color/text_background"
+		        android:background="@drawable/border"
 		        android:ems="10"
 		        android:hint="@string/theme_picker_hint"
 		        android:inputType="textMultiLine"
@@ -67,7 +67,7 @@
 		        android:layout_below="@+id/theme_picker_theme"
 		        android:layout_centerHorizontal="true"
 		        android:layout_margin="5dp"
-		        android:background="@color/login_button_background"
+		        android:background="@drawable/button_background_with_border"
 		        android:text="@string/theme_picker_submit_button"
 		        android:clickable="true"
 		        android:onClick="startJudgeGameplay" />

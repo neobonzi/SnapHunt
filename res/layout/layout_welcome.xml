@@ -3,133 +3,121 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
 		    android:fillViewport="true"
+		    android:keepScreenOn="true"
 		    >
 
 	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:descendantFocusability="beforeDescendants"
-	    android:background="@drawable/background"
 	    android:focusable="true"
 	    android:focusableInTouchMode="true"
 	    android:orientation="vertical"
-	    android:windowSoftInputMode="stateHidden" >
+	    android:windowSoftInputMode="stateHidden"
+	    android:background="@drawable/background"
+	   	 >
 
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
-	        android:layout_weight="1.5" >
+	        android:layout_weight="1"
+			 >
 
-	     	<ImageView
-	     	    android:id="@+id/snapHuntLogo"
-	     	    android:layout_width="wrap_content"
-	     	    android:layout_height="wrap_content"
-	     	    android:layout_centerHorizontal="true"
-	     	    android:layout_centerVertical="true"
-	     	    android:alpha=".5"
-	     	    android:contentDescription="@string/logo_description"
-	     	    android:src="@drawable/ic_snaphunt_logo" />
+	        <ImageView
+	            android:id="@+id/snapHuntLogo"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_alignParentTop="true"
+	            android:layout_centerHorizontal="true"
+	            android:layout_marginTop="20dp"
+	            android:alpha=".6"
+	            android:contentDescription="@string/logo_description"
+	            android:src="@drawable/ic_snaphunt_logo" />
 
-			<ImageView
-			    android:id="@+id/SnapHuntTitleLogo"
-			    android:layout_width="wrap_content"
-			    android:layout_height="wrap_content"
-			    android:layout_below="@+id/snapHuntLogo"
-			    android:layout_marginTop="22dp"
-			    android:src="@drawable/shtitle" />
+	        <ImageView
+	            android:id="@+id/SnapHuntTitleLogo"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:layout_below="@+id/snapHuntLogo"
+	            android:layout_centerHorizontal="true"
+	            android:layout_centerVertical="false"
+	            android:layout_marginTop="10dp"
+	            android:src="@drawable/shtitle" />
 
 	    </RelativeLayout>
 
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
-	        android:layout_weight="1" >
-
-		    <EditText
+	        android:layout_weight=".75" >
+		<EditText
 	            android:id="@+id/loginPassword"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
-	            android:layout_centerHorizontal="true"
+				android:layout_centerHorizontal="true"
 	            android:layout_centerVertical="true"
-				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="5dp"
-				android:paddingLeft="5dp"
-	            android:inputType="textPassword"
-	            android:textCursorDrawable="@null"
-	    		android:textColor="@color/grey_text"
-	            android:background="@color/text_background"
+	            android:layout_marginRight="40dp"
+	            android:layout_marginTop="5dp"
+	            android:background="@drawable/border"
 	            android:hint="@string/password_text"
-	            android:layout_alignParentBottom="true"  />
-
-	        <EditText
+	            android:inputType="textPassword"
+	            android:paddingLeft="5dp"
+	            android:textColor="@color/grey_text"
+	            android:textCursorDrawable="@null" />
+       		<EditText
 	            android:id="@+id/loginUsername"
 	            android:layout_width="match_parent"
 	            android:layout_height="wrap_content"
+				android:layout_above="@id/loginPassword"
+	            android:layout_marginLeft="40dp"
+	            android:layout_marginRight="40dp"
+	            android:layout_marginTop="5dp"
+	            android:background="@drawable/border"
+	            android:hint="@string/login_text"
+	            android:inputType="text"
+	            android:paddingLeft="5dp"
+	            android:textColor="@color/grey_text"
+	            android:textCursorDrawable="@null"
+	             />
+
+	        <Button
+	            android:id="@+id/loginButton"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
 	            android:layout_centerHorizontal="true"
 	            android:layout_centerVertical="true"
-	            android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="5dp"
-				android:paddingLeft="5dp"
-	            android:inputType="text"
-	            android:textCursorDrawable="@null"
-	    		android:textColor="@color/grey_text"
-	            android:background="@color/text_background"
-	            android:hint="@string/login_text"
-	            android:layout_above="@id/loginPassword"
-
-	             >
-		        </EditText>
-
-
-
+	            android:layout_marginRight="40dp"
+	            android:layout_marginTop="5dp"
+	            android:paddingTop="10dp"
+	            android:paddingBottom="10dp"
+	            android:background="@drawable/button_background_with_border"
+	            android:layout_below="@id/loginPassword"
+	            android:clickable="true"
+	            android:text="@string/login_button_text"
+	            android:textColor="@color/grey_text"
+	            android:textStyle="bold" />
 
 	    </RelativeLayout>
-		   	<RelativeLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight="0.5" >
-		        <Button
-	            android:id="@+id/loginButton"
-	            android:layout_width="match_parent"
-	            android:layout_height="match_parent"
-	            android:layout_centerHorizontal="true"
-				android:layout_marginRight="40dp"
-	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="15dp"
-	            android:background="@color/login_button_background"
-	            android:textStyle="bold"
-	    		android:textColor="@color/grey_text"
-	            android:text="@string/login_button_text"
-	            android:clickable="true"
 
-				 />
-		 </RelativeLayout>
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
-	        android:layout_weight="0.75" >
+	        android:layout_weight=".25" >
 
 	        <TextView
 	            android:id="@+id/loginRegister"
 	            android:layout_width="wrap_content"
 	            android:layout_height="wrap_content"
+	            android:layout_alignParentBottom="true"
 	            android:layout_centerHorizontal="true"
-				android:layout_alignParentBottom="true"
-	            android:text="@string/register_text"
+	            android:layout_marginBottom="20dp"
 	            android:clickable="true"
-				android:onClick="startRegistration"
-	            android:textColor="@color/grey_text"
-	            android:padding="10dp"
-	            android:paddingLeft="15dp"
-	            android:paddingRight="15dp"
-	            android:layout_marginBottom="20dp" />
-
+	            android:onClick="startRegistration"
+	            android:text="@string/register_text"
+	            android:textColor="@color/grey_text" />
 	    </RelativeLayout>
-
-
-
-
 	</LinearLayout>
+
 	</ScrollView>

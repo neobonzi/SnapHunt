@@ -40,7 +40,6 @@
 	            android:layout_height="wrap_content"
 	            android:text="@string/register_title"
 	            android:textColor="@color/grey_text"
-	            android:textAllCaps="true"
 	            android:textStyle="bold"
 	            android:textSize="20sp"
 	            android:layout_marginLeft="25dp"
@@ -61,7 +60,7 @@
 	            android:layout_below="@id/registerTitle"
 	            android:textCursorDrawable="@null"
 	    		android:textColor="@color/grey_text"
-	            android:background="@color/text_background"
+	            android:background="@drawable/border"
 	            android:hint="@string/register_username" >
 	        </EditText>
 	
@@ -79,7 +78,7 @@
 	            android:inputType="textPassword"
 	            android:textCursorDrawable="@null"
 	    		android:textColor="@color/grey_text"
-	            android:background="@color/text_background"
+	            android:background="@drawable/border"
 	            android:hint="@string/register_password"  />
 	         <EditText
 	            android:id="@+id/registerVerifyPassword"
@@ -95,7 +94,7 @@
 	            android:inputType="textPassword"
 	            android:textCursorDrawable="@null"
 	    		android:textColor="@color/grey_text"
-	            android:background="@color/text_background"
+	            android:background="@drawable/border"
 	            android:hint="@string/register_verify_password"  />
 	       <ImageView
 	     	    android:contentDescription="@string/password_verification"
@@ -123,7 +122,7 @@
 	            android:inputType="textEmailAddress"
 	            android:textCursorDrawable="@null"
 	    		android:textColor="@color/grey_text"
-	            android:background="@color/text_background"
+	            android:background="@drawable/border"
 	            android:hint="@string/register_email"  />
 	        
 	        <Button
@@ -137,7 +136,7 @@
 				android:layout_marginBottom="15dp"
 				android:layout_alignParentBottom="true"
 	            android:layout_below="@id/registerEmail"
-	            android:background="@color/login_button_background"
+	            android:background="@drawable/button_background_with_border"
 	            android:textStyle="bold"
 	    		android:textColor="@color/grey_text"
 	            android:text="@string/register_button_text"

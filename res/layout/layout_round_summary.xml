@@ -36,6 +36,7 @@
 	            android:layout_centerVertical="true"
 	            android:src="@drawable/blank_head"
 	            android:layout_margin="15dp"
+	            android:background="@drawable/border"
 	             />
 
 	        <ImageView
@@ -69,7 +70,8 @@
 		   		    android:layout_height="match_parent"
 		   		    android:layout_centerVertical="true"
 		   		    android:layout_margin="5dp"
-		   		    android:src="@drawable/blank_head" />
+		   		    android:src="@drawable/blank_head"
+					android:background="@drawable/border"/>
 	        </RelativeLayout>
 	        <RelativeLayout
 		        android:layout_width="0dp"
@@ -81,7 +83,8 @@
 		   		    android:layout_height="match_parent"
 		   		    android:layout_centerVertical="true"
 		   		    android:layout_margin="5dp"
-		   		    android:src="@drawable/blank_head" />
+		   		    android:src="@drawable/blank_head"
+		   		    android:background="@drawable/border" />
 			</RelativeLayout>
 			</LinearLayout>
 			
@@ -102,7 +105,7 @@
 	            android:layout_centerHorizontal="true"
 	            android:text="@string/round_summary_done_button" 
 	            android:textColor="@color/grey_text"
-	            android:background="@color/login_button_background"
+	            android:background="@drawable/button_background_with_border"
 	            android:clickable="true"
 	            android:onClick="showGamesOverview"/>
 

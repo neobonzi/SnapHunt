@@ -43,7 +43,7 @@
 			    android:layout_marginTop="10dp"
 			    android:layout_toRightOf="@id/games_overview_snap_hunt_logo"
 			    android:text="@string/games_overview_new_game_button_text"
-			    android:background="@color/login_button_background"
+			    android:background="@drawable/button_background_with_border"
 			    android:textColor="@color/grey_text"
 			    android:clickable="true"
 			    android:onClick="startCreateGame"

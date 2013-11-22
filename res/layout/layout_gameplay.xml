@@ -37,6 +37,7 @@
 	            android:src="@drawable/ic_camera"
 	            android:layout_margin="15dp"
 	            android:clickable="true"
+	            android:background="@drawable/border"
 	             />
 
 
@@ -71,7 +72,8 @@
 		   		    android:layout_height="match_parent"
 		   		    android:layout_centerVertical="true"
 		   		    android:layout_margin="5dp"
-		   		    android:src="@drawable/blank_head" />
+		   		    android:src="@drawable/blank_head"
+		   		    android:background="@drawable/border" />
 	        </RelativeLayout>
 	        <RelativeLayout
 		        android:layout_width="0dp"
@@ -83,7 +85,8 @@
 		   		    android:layout_height="match_parent"
 		   		    android:layout_centerVertical="true"
 		   		    android:layout_margin="5dp"
-		   		    android:src="@drawable/blank_head" />
+		   		    android:src="@drawable/blank_head"
+		   		    android:background="@drawable/border" />
 			</RelativeLayout>
 			</LinearLayout>
 	   </RelativeLayout>
