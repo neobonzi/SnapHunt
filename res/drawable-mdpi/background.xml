@@ -3,4 +3,5 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:src="@drawable/sh_bg"
     android:antialias="false"
+    android:tileMode="repeat"
     android:dither="false" />
