@@ -31,9 +31,7 @@ import android.widget.Toast;
 
 
 public class Welcome extends Activity {
-	String ServerRoot = "http://75.128.20.108/";
-	String APIPath = "snapAPI/";
-	String scriptPath = ServerRoot + APIPath;
+	String ServerRoot = "http://regal-airway-412.appspot.com/";
 	URL basePath;
 	int gameId;
 	Integer uid;
@@ -89,7 +87,7 @@ public class Welcome extends Activity {
     }
 
     public void winnerPickedCheck() {
-    	String url = "http://75.128.20.108/snapAPI/checkJudgePicked.php?gameId="+gameId;
+    	String url = ServerRoot + "judgePickCheck?gameId="+gameId;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -129,7 +127,7 @@ public class Welcome extends Activity {
     }
 
     private void judgeCheck(int gameId) {
-		String url = "http://75.128.20.108/snapAPI/checkIfJudge.php?uid="+uid+"&gameId="+gameId;
+		String url = ServerRoot + "judgeCheck?uid="+uid+"&gameId="+gameId;
 		this.gameId = gameId;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
@@ -159,7 +157,7 @@ public class Welcome extends Activity {
 	}
 
 	private void getPlayerGameId() {
-		String url = "http://75.128.20.108/snapAPI/getPlayerGameId.php?id="+uid;
+		String url = ServerRoot + "getPlayerGameId?id="+uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -184,7 +182,7 @@ public class Welcome extends Activity {
 
     /* Returns the userid given a username and password */
     public void login(String username, String password) {
-    	String url = scriptPath+"login.php?username="+username+"&password="+password;
+    	String url = ServerRoot + "login?username="+username+"&password="+password;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override

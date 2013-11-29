@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class RoundSummary extends Activity {
-
+	String ServerRoot = "http://regal-airway-412.appspot.com/";
 	ImageButton winPic;
 	ImageButton pic1;
 	ImageButton pic2;
@@ -70,7 +70,7 @@ public class RoundSummary extends Activity {
 
 	private void setTheme() {
 		/* First get all player ids who have submitted and are not judges */
-		String url = "http://75.128.20.108/snapAPI/getTheme.php?gameId="+gameId;
+		String url = ServerRoot + "getTheme?gameId="+gameId;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -98,7 +98,7 @@ public class RoundSummary extends Activity {
 	}
 
 	private void contPressed() {
-		String url = "http://75.128.20.108/SnapAPI/contPressed.php?gameId="+gameId+"&uid="+uid;
+		String url = ServerRoot + "contPressed?gameId="+gameId+"&uid="+uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -144,7 +144,7 @@ public class RoundSummary extends Activity {
 	}
 
 	private void setPlayerImage2(Integer playerId) {
-		String url = "http://75.128.20.108/SnapAPI/getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId?gameId="+gameId+"&uid="+playerId;
 		Toast.makeText(this, "Retreiving image for player" + playerId, Toast.LENGTH_SHORT).show();
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
@@ -163,7 +163,7 @@ public class RoundSummary extends Activity {
 	}
 
 	private void setPlayerImage1(Integer playerId) {
-		String url = "http://75.128.20.108/SnapAPI/getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
 		Toast.makeText(this, "Retreiving image for player" + playerId, Toast.LENGTH_SHORT).show();
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
@@ -182,7 +182,7 @@ public class RoundSummary extends Activity {
 	}
 
 	private void setPlayerImageWinner(Integer playerId) {
-		String url = "http://75.128.20.108/SnapAPI/getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
@@ -200,7 +200,7 @@ public class RoundSummary extends Activity {
 	}
 
 	private void initNextRound() {
-		String url = "http://75.128.20.108/snapAPI/resetRound.php?&gameId="+gameId+"&uid="+uid;
+		String url = ServerRoot + "resetRound?&gameId="+gameId+"&uid="+uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -233,7 +233,7 @@ public class RoundSummary extends Activity {
 	private void getWinner(ArrayList<Integer> playerIds) {
 		this.playerIds = playerIds;
 		/* First get all player ids who have submitted and are not judges */
-		String url = "http://75.128.20.108/snapAPI/getWinner.php?&gameId="+gameId;
+		String url = ServerRoot + "getWinner?&gameId="+gameId;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
@@ -255,7 +255,7 @@ public class RoundSummary extends Activity {
 
 	private void findPlayersByGameId() {
 		/* First get all player ids who have submitted and are not judges */
-		String url = "http://75.128.20.108/snapAPI/getPlayerSubmitted.php?&gameId="+gameId;
+		String url = ServerRoot + "getPlayerSubmitted?&gameId="+gameId;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
 					@Override
