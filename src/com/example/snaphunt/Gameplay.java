@@ -356,7 +356,7 @@ public class Gameplay extends Activity {
 
 	        try {
 	            HttpClient httpclient = new DefaultHttpClient();
-	            HttpPost httppost = new HttpPost("http://75.128.20.108/SnapAPI/uploadPicById.php?uid="+uid+"&gameId="+gameId);
+	            HttpPost httppost = new HttpPost(ServerRoot + "uploadPicById?uid="+uid+"&gameId="+gameId);
 	            httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
 
 	            HttpResponse response = httpclient.execute(httppost);
