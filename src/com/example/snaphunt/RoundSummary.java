@@ -182,7 +182,7 @@ public class RoundSummary extends Activity {
 	}
 
 	private void setPlayerImageWinner(Integer playerId) {
-		String url = ServerRoot + "getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId?gameId="+gameId+"&uid="+playerId;
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
