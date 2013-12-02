@@ -151,7 +151,7 @@ public class GameplayJudge extends Activity {
 	}
 
 	private void setPlayerImage3(Integer playerId) {
-		String url = ServerRoot + "getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId?gameId="+gameId+"&uid="+playerId;
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
@@ -168,7 +168,7 @@ public class GameplayJudge extends Activity {
 	}
 
 	private void setPlayerImage1(Integer playerId) {
-		String url = ServerRoot + "getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId?gameId="+gameId+"&uid="+playerId;
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
@@ -185,7 +185,7 @@ public class GameplayJudge extends Activity {
 	}
 
 	private void setPlayerImage2(Integer playerId) {
-		String url = ServerRoot + "getPicsByGameId.php?gameId="+gameId+"&uid="+playerId;
+		String url = ServerRoot + "getPicsByGameId?gameId="+gameId+"&uid="+playerId;
 		ImageRequest jsImgRequest = new ImageRequest(url, new Response.Listener<Bitmap>() {
 	        @Override
 	        public void onResponse(Bitmap response) {
