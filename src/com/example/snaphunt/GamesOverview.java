@@ -158,6 +158,7 @@ public class GamesOverview extends Activity {
     public void startCreateGame(View view) {
 
         Intent intent = new Intent(this, CreateGame.class);
+        intent.putExtra("uid", uid);
         startActivity(intent);
     }
 

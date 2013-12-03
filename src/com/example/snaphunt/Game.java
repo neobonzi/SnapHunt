@@ -1,6 +1,7 @@
 package com.example.snaphunt;
 
 public class Game {
+	public int myint = 0;
 
 	String id, p1username, p2username, p3username, p4username, groupName, theme;
 	Game() {

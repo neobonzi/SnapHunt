@@ -23,7 +23,7 @@
     <string name="title_activity_gameplay">Gameplay</string>
     <string name="title_activity_round_summary">RoundSummary</string>
     <string name="title_activity_gameplay_judge">GameplayJudge</string>
-	
+
     <string name="create_game_group_name">Group Name</string>
     <string name="create_game_group_name_hint"> name</string>
     <string name="create_game_invite_players">Add Players</string>
@@ -31,7 +31,7 @@
     <string name="create_game_player2_button_text">P2</string>
     <string name="create_game_player3_buttont_text">P3</string>
     <string name="create_game_enter_username">Enter Username</string>
-    <string name="create_game_enter_username_hint"> username</string>
+    <string name="create_game_enter_username_hint">Enter username or leave blank for random!</string>
     <string name="create_game_round_length">Round Length [Hours]</string>
     <string name="create_game_round_length_opt_1">4</string>
     <string name="create_game_round_length_opt_2">12</string>
@@ -41,7 +41,7 @@
 	<string name="create_game_points_to_win_opt2">5</string>
     <string name="create_game_points_to_win_opt3">10</string>
  	<string name="create_game_button_start">Start Game</string>
-    
+
     <string name="games_overview_new_game_button_text">New Game</string>
     <string name="games_overview_active_games">Active Games</string>
     <string name="games_overview_game_invitations">Invitations</string>
@@ -49,21 +49,21 @@
     <string name="gameview_groupname">GroupName</string>
     <string name="gameview_current_theme">Theme</string>
     <string name="gameview_player">player</string>
-    
+
     <string name="theme_picker_title">Pick a Theme</string>
     <string name="theme_picker_hint">enter theme</string>
     <string name="theme_picker_submit_button">Submit</string>
-    
+
     <string name="gameplay_timeleft">Time left 0:00</string>
     <string name="gameplay_theme">Playing "theme"</string>
-    
+
     <string name="gameplay_judge">Pick your favorite!</string>
     <string name="gameplay_judge_submit_button">Submit</string>
-    
+
     <string name="round_summary_done_button">Done</string>
 
 	<string name="snap_hunt_SNAP">Snap</string>
 	<string name="snap_hunt_HUNT">Hunt</string>
-	
+
 </resources>
 
