@@ -3,17 +3,17 @@
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
 		    android:fillViewport="true"
- >		
-	<LinearLayout 
+ >
+	<LinearLayout
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
-	    android:orientation="vertical" 
+	    android:orientation="vertical"
 	    android:background="@drawable/background"
     	android:focusable="true"
 	    android:descendantFocusability="beforeDescendants"
 		android:focusableInTouchMode="true"
 	    android:windowSoftInputMode="stateHidden" >
-	
+
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
@@ -26,14 +26,14 @@
 		        android:layout_centerHorizontal="true"
 	            android:layout_centerVertical="true"
 		        android:src="@drawable/ic_snaphunt_logo" />
-	        
+
 	    </RelativeLayout>
-	
+
 	    <RelativeLayout
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight="1" >
-			
+
 			<TextView
 	            android:id="@+id/registerTitle"
 	            android:layout_width="wrap_content"
@@ -45,7 +45,7 @@
 	            android:layout_marginLeft="25dp"
 	            android:layout_marginTop="25dp"
 	            android:layout_marginBottom="40dp" />
-			
+
 	        <EditText
 	            android:id="@+id/registerUsername"
 	            android:layout_width="match_parent"
@@ -54,8 +54,8 @@
 	            android:layout_centerVertical="true"
 	            android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="5dp"  
-				android:paddingLeft="5dp"       
+				android:layout_marginTop="5dp"
+				android:paddingLeft="5dp"
 	            android:inputType="text"
 	            android:layout_below="@id/registerTitle"
 	            android:textCursorDrawable="@null"
@@ -63,7 +63,7 @@
 	            android:background="@drawable/border"
 	            android:hint="@string/register_username" >
 	        </EditText>
-	
+
 	        <EditText
 	            android:id="@+id/registerPassword"
 	            android:layout_width="match_parent"
@@ -73,7 +73,7 @@
 	            android:layout_centerVertical="true"
 				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="10dp"  
+				android:layout_marginTop="10dp"
 				android:paddingLeft="5dp"
 	            android:inputType="textPassword"
 	            android:textCursorDrawable="@null"
@@ -89,7 +89,7 @@
 	            android:layout_centerVertical="true"
 				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="10dp"  
+				android:layout_marginTop="10dp"
 				android:paddingLeft="5dp"
 	            android:inputType="textPassword"
 	            android:textCursorDrawable="@null"
@@ -117,14 +117,14 @@
 	            android:layout_centerVertical="true"
 				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="10dp"  
+				android:layout_marginTop="10dp"
 				android:paddingLeft="5dp"
 	            android:inputType="textEmailAddress"
 	            android:textCursorDrawable="@null"
 	    		android:textColor="@color/grey_text"
 	            android:background="@drawable/border"
 	            android:hint="@string/register_email"  />
-	        
+
 	        <Button
 	            android:id="@+id/registerButton"
 	            android:layout_width="match_parent"
@@ -132,7 +132,7 @@
 	            android:layout_centerHorizontal="true"
 				android:layout_marginRight="40dp"
 	            android:layout_marginLeft="40dp"
-				android:layout_marginTop="20dp"  
+				android:layout_marginTop="20dp"
 				android:layout_marginBottom="15dp"
 				android:layout_alignParentBottom="true"
 	            android:layout_below="@id/registerEmail"
@@ -141,14 +141,14 @@
 	    		android:textColor="@color/grey_text"
 	            android:text="@string/register_button_text"
 	            android:clickable="true"
-	            android:onClick="startGamesOverview"
+	            android:onClick="registerSubmit"
 				 />
-	     	
+
 	    </RelativeLayout>
-	
-	
-	  
-	
-	
+
+
+
+
+
 	</LinearLayout>
 	</ScrollView>

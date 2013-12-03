@@ -1,5 +1,6 @@
 package com.example.snaphunt;
 
+<<<<<<< HEAD
 //Game object to inflate GameView layout object
 public class Game {
 	private String groupName;
@@ -59,5 +60,35 @@ public class Game {
 					this.p4 == game2.p4);
 		}
 		return false;
+=======
+public class Game {
+
+	String id, p1username, p2username, p3username, p4username, groupName, theme;
+	Game() {
+
+	}
+	public String getp1name() {
+		return p1username;
+	}
+
+	public String getp2name() {
+		return p2username;
+	}
+
+	public String getp3name() {
+		return p3username;
+	}
+
+	public String getp4name() {
+		return p4username;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public String getId() {
+		return id;
+>>>>>>> bb1ac7d0cadb1ef9a35f6562140c0cb22b1a26c1
 	}
 }

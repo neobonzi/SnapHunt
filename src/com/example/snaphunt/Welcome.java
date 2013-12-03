@@ -83,7 +83,7 @@ public class Welcome extends Activity {
 
     public void routeUser(Integer uid) {
     	this.uid = uid;
-    	getPlayerGameId();
+    	startGamesOverview();
     }
 
     public void winnerPickedCheck() {
@@ -124,6 +124,12 @@ public class Welcome extends Activity {
 					}
 				});
 		queue.add(jsObjRequest);
+    }
+
+    private void startGamesOverview() {
+        Intent intent = new Intent(this, GamesOverview.class);
+        intent.putExtra("uid", this.uid);
+        startActivity(intent);
     }
 
     private void judgeCheck(int gameId) {
@@ -201,10 +207,5 @@ public class Welcome extends Activity {
 		queue.add(jsObjRequest);
     }
 
-    /** Called when the user clicks the Login Button */
-    public void startGamesOverview(View view) {
 
-        Intent intent = new Intent(this, GamesOverview.class);
-        startActivity(intent);
-    }
 }
