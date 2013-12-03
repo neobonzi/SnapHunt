@@ -76,8 +76,13 @@ public class Gameplay extends Activity {
 		queue = Volley.newRequestQueue(this);
 		setTheme();
 		findPlayersSubmittedNotJudges();
+		setPlayerConfirmed();
 	}
 
+	private void setPlayerConfirmed(){
+		
+	}
+	
 	private void setImagesForPlayers(ArrayList<Integer> submittedIds) {
 		/* Remove current user */
 		boolean player1Set = false;
@@ -200,6 +205,7 @@ public class Gameplay extends Activity {
 	}
 
 	private void updateTheme(String theme) {
+		Log.d("snaphunt","theme: "+ theme);
 		themeField.setText(theme);
 	}
 

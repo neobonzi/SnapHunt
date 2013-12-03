@@ -56,15 +56,7 @@ public class GamesOverview extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_games_overview);
-		
-//		View jokeView = new View(this.getBaseContext());
-//		View jokeView1 = new View(this.getBaseContext());
-//
-//		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
-//		jokeView1.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
-//
-//		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
-//		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
+
 
 		Intent intent = getIntent();
 		uid = intent.getIntExtra("uid", -1);
@@ -83,6 +75,23 @@ public class GamesOverview extends Activity {
 		fillGames();
 		fillInvites();
 		
+		initListeners();
+		
+
+	}
+	
+	@Override
+	protected void onResume(){
+		super.onResume();
+		if(games.size() > 0 && invites.size() > 0){
+			gameView.removeAllViewsInLayout();
+			gameInvitesView.removeAllViewsInLayout();
+			fillGames();
+			fillInvites();
+		}
+	}
+
+	private void initListeners() {
 		gameView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -99,6 +108,23 @@ public class GamesOverview extends Activity {
 			}
 
 		});
+		
+		gameInvitesView.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				Log.d("SnapHunt_GamesOverview","view: "+ view + " pos: "+ position + "id: " + id);
+				Log.d("SnapHunt_GamesOverview","gameID: " + invites.get(position).getId());
+
+				Intent intent = new Intent(getBaseContext(), Gameplay.class);
+				intent.putExtra("gameId", invites.get(position).getId());
+				intent.putExtra("uid", uid);
+				startActivity(intent);
+				
+			}
+
+		});		
 	}
 
 	private void invitesFilled() {
@@ -110,7 +136,7 @@ public class GamesOverview extends Activity {
 	}
 
 	private void fillInvites() {
-
+		invites.clear();
 		String url = ServerRoot + "getPlayerInvites?id=" + uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
@@ -147,7 +173,8 @@ public class GamesOverview extends Activity {
 		queue.add(jsObjRequest);
 	}
 
-	private void fillGames() {
+	private void fillGames() {		
+		games.clear();
 		String url = ServerRoot + "getPlayerGames?id=" + uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
@@ -216,6 +243,7 @@ public class GamesOverview extends Activity {
     public void startCreateGame(View view) {
 
         Intent intent = new Intent(this, CreateGame.class);
+        intent.putExtra("uid", uid);
         startActivity(intent);
     }
 

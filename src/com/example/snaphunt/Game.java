@@ -6,6 +6,7 @@ public class Game {
 	private String groupName;
 	private String theme;
 
+
 	//player id?
 	private int currentJudge;
 	

@@ -2,7 +2,7 @@
 		    android:id="@+id/create_game_scrollView"
 		    android:layout_width="match_parent"
 		    android:layout_height="match_parent"
-		    android:fillViewport="true">	
+		    android:fillViewport="true">
 	<LinearLayout
 	    android:layout_width="match_parent"
 	    android:layout_height="wrap_content"
@@ -11,54 +11,54 @@
     	android:focusable="true"
 	    android:descendantFocusability="beforeDescendants"
 		android:focusableInTouchMode="true"
-	    android:windowSoftInputMode="stateHidden"	    
+	    android:windowSoftInputMode="stateHidden"
 	     >
 		 <RelativeLayout
 		    android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight=".5" >
-		     
+
 		    <TextView
 		        android:id="@+id/create_game_group_name"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="@string/create_game_group_name"
+		        android:textSize="30sp"
 		        android:textColor="@color/grey_text"
 		        android:layout_marginTop="15dp"
 		        android:layout_marginLeft="15dp" />
-		
+
 		    <EditText
 		        android:id="@+id/create_game_group_name_text"
 		        android:layout_width="match_parent"
 		        android:layout_height="wrap_content"
 		        android:layout_below="@id/create_game_group_name"
-		        android:layout_marginLeft="30dp"
-		        android:layout_marginRight="30dp"
-		        android:layout_marginTop="10dp"
-		        android:paddingLeft="5dp"
+		        android:layout_margin="10dp"
+		        android:padding="10dp"
 		        android:ems="10"
 		        android:hint="@string/create_game_group_name_hint"
 		        android:textColor="@color/grey_text"
 		        android:background="@drawable/border" >
-	
-		            
+
+
 		    </EditText>
-		    
-		  </RelativeLayout> 
+
+		  </RelativeLayout>
 		<RelativeLayout
 		    android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight="1.25" >
-	        
+
 		    <TextView
 		        android:id="@+id/create_game_invite_players"
 		        android:layout_width="wrap_content"
 		        android:layout_height="wrap_content"
 		        android:text="@string/create_game_invite_players"
+		        android:textSize="30sp"
 		        android:textColor="@color/grey_text"
 		        android:layout_marginTop="10dp"
 		        android:layout_marginLeft="15dp" />
-		
+
 		    <RelativeLayout
 		        android:id="@+id/create_game_invite_players_layout"
 		        android:layout_width="match_parent"
@@ -68,7 +68,7 @@
 		        android:layout_margin="10dp"
 		        android:layout_below="@id/create_game_invite_players"
 		         >
-		
+
 		        <ImageButton
 		            android:contentDescription="@string/create_game_player2_button_text"
 		            android:id="@+id/create_game_player2"
@@ -81,7 +81,7 @@
 		            android:src="@drawable/blank_head"
 		            android:clickable="true"
 		            android:alpha="1.0" />
-		
+
 		        <ImageButton
 		            android:contentDescription="@string/create_game_player1_button_text"
 		            android:id="@+id/create_game_player1"
@@ -92,9 +92,9 @@
 		            android:src="@drawable/blank_head"
 		            android:clickable="true"
 		            android:alpha="1.0" />
-		
+
 		        <ImageButton
-		            android:contentDescription="@string/create_game_player3_buttont_text"	         
+		            android:contentDescription="@string/create_game_player3_buttont_text"
 		            android:id="@+id/create_game_player3"
 		            android:layout_width="wrap_content"
 		            android:layout_height="wrap_content"
@@ -113,118 +113,40 @@
 			        android:textColor="@color/grey_text"
 			        android:layout_marginTop="10dp"
 			        android:layout_marginLeft="15dp" />
-			
-			    <EditText
-			        android:id="@+id/create_game_username_text"
+			  <EditText
+			        android:id="@+id/create_game_p1uname"
 			        android:layout_width="match_parent"
 			        android:layout_height="wrap_content"
 			        android:textColor="@color/grey_text"
 			        android:layout_below="@id/create_game_enter_username"
 			        android:hint="@string/create_game_enter_username_hint"
-			        android:layout_marginLeft="30dp"
-			        android:layout_marginRight="30dp"
-			        android:layout_marginTop="10dp"
-			        android:paddingLeft="5dp"
+			        android:layout_margin="10dp"
+			        android:padding="10dp"
 			        android:ems="10"
 					android:background="@drawable/border"/>
-		
-		    
-		</RelativeLayout>
-	
-		<RelativeLayout
-		   android:layout_width="match_parent"
-		   android:layout_height="0dp"
-		   android:layout_weight="1"
-		    >
-		    <TextView
-		        android:id="@+id/create_game_round_length"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/create_game_round_length"
-		        android:textColor="@color/grey_text"
-		        android:layout_marginLeft="15dp"
-		        android:layout_marginTop="10dp"
-		         />
-		
-		    <RadioGroup
-		        android:id="@+id/create_game_length_rGroup"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:layout_below="@id/create_game_round_length"
-		        android:layout_centerInParent="true"
-		        android:layout_gravity="center_horizontal"
-		        android:layout_marginTop="10dp"
-		        android:orientation="horizontal" >
-		
-		        <RadioButton
-		            android:id="@+id/create_game_round_length_opt1"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:checked="true"
-		            android:text="@string/create_game_round_length_opt_1"
-		            android:textColor="@color/grey_text" />
-		
-		        <RadioButton
-		            android:id="@+id/create_game_round_length_op2"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:layout_marginLeft="30dp"
-		            android:layout_marginRight="30dp"
-		            android:text="@string/create_game_round_length_opt_2"
-		            android:textColor="@color/grey_text" />
-		
-		        <RadioButton
-		            android:id="@+id/create_game_round_length_opt"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:text="@string/create_game_round_length_opt_3"
-		            android:textColor="@color/grey_text" />
-		    </RadioGroup>
-		
-		    <TextView
-		        android:id="@+id/create_game_points"
-		        android:layout_width="wrap_content"
-		        android:layout_height="wrap_content"
-		        android:text="@string/create_game_points_to_win"
-		       	android:layout_below="@id/create_game_length_rGroup"
-		        android:textColor="@color/grey_text"
-		        android:layout_marginTop="15dp"
-		        android:layout_marginLeft="15dp" />
-		
-		    <RadioGroup
-		        android:id="@+id/create_game_points_rGroup"
-		        android:layout_width="wrap_content"
-		        android:layout_height="match_parent"
-		        android:layout_below="@id/create_game_points"
-		        android:layout_centerInParent="true"
-		        android:layout_gravity="center_horizontal"
-		        android:layout_marginTop="10dp"
-		        android:orientation="horizontal" >
-		
-		        <RadioButton
-		            android:id="@+id/create_game_points_opt1"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:checked="true"
-		            android:text="@string/create_game_points_to_win_opt1"
-		            android:textColor="@color/grey_text" />
-		
-		        <RadioButton
-		            android:id="@+id/create_game_points_opt2"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:layout_marginLeft="30dp"
-		            android:layout_marginRight="30dp"
-		            android:text="@string/create_game_points_to_win_opt2"
-		            android:textColor="@color/grey_text" />
-		
-		        <RadioButton
-		            android:id="@+id/create_game_points_opt3"
-		            android:layout_width="wrap_content"
-		            android:layout_height="match_parent"
-		            android:text="@string/create_game_points_to_win_opt3"
-		            android:textColor="@color/grey_text" />
-		    </RadioGroup>
+			    <EditText
+			        android:id="@+id/create_game_p2uname"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:textColor="@color/grey_text"
+			        android:layout_below="@id/create_game_p1uname"
+			        android:hint="@string/create_game_enter_username_hint"
+			        android:layout_margin="10dp"
+			        android:padding="10dp"
+			        android:ems="10"
+					android:background="@drawable/border"/>
+			     <EditText
+			        android:id="@+id/create_game_p3uname"
+			        android:layout_width="match_parent"
+			        android:layout_height="wrap_content"
+			        android:textColor="@color/grey_text"
+			        android:layout_below="@id/create_game_p2uname"
+			        android:hint="@string/create_game_enter_username_hint"
+			        android:layout_margin="10dp"
+			        android:padding="10dp"
+			        android:ems="10"
+					android:background="@drawable/border"/>
+
 		</RelativeLayout>
 
 		<RelativeLayout
@@ -249,6 +171,6 @@
 		        android:text="@string/create_game_button_start"
 		        android:textColor="@color/grey_text" />
 		</RelativeLayout>
-	
+
 	</LinearLayout>
 </ScrollView>
