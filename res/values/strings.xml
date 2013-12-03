@@ -49,6 +49,7 @@
     <string name="gameview_groupname">GroupName</string>
     <string name="gameview_current_theme">_</string>
     <string name="gameview_player">player</string>
+<<<<<<< HEAD
     <string name="gameview_player1">_</string>
     <string name="gameview_player2">_</string>
 	<string name="gameview_player3">_</string>
@@ -57,12 +58,18 @@
 	<string name="gameview_theme">Theme:</string>
         
     
+=======
+>>>>>>> 8d103c88ef582ec542c9984badd605e1c3f70435
 
     <string name="theme_picker_title">Pick a Theme</string>
     <string name="theme_picker_hint">enter theme</string>
     <string name="theme_picker_submit_button">Submit</string>
 
+<<<<<<< HEAD
     <string name="gameplay_timeleft"></string>
+=======
+    <string name="gameplay_timeleft">Time left 0:00</string>
+>>>>>>> 8d103c88ef582ec542c9984badd605e1c3f70435
     <string name="gameplay_theme">Playing "theme"</string>
 
     <string name="gameplay_judge">Pick your favorite!</string>
@@ -72,10 +79,13 @@
 
 	<string name="snap_hunt_SNAP">Snap</string>
 	<string name="snap_hunt_HUNT">Hunt</string>
+<<<<<<< HEAD
 	
 	<string name="NULL"></string>
 	
 	
+=======
+>>>>>>> 8d103c88ef582ec542c9984badd605e1c3f70435
 
 </resources>
 
