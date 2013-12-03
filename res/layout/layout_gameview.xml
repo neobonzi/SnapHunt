@@ -20,10 +20,13 @@
 		    android:layout_centerHorizontal="true"
 		    android:layout_centerVertical="true"
 		    android:layout_margin="5dp"
-		    android:text="@string/gameview_timeleft"
+		    android:text="@string/NULL"
 		    android:textColor="@color/grey_text" />
 
 	</RelativeLayout>
+
+   	
+
 	<RelativeLayout
 		android:layout_width="0dp"
     	android:layout_height="match_parent" 
@@ -79,13 +82,68 @@
 	        android:layout_toRightOf="@id/gameview_player2"
 	        android:src="@drawable/blank_head"
 	        android:background="@drawable/button_background_with_border"/>
+	    
+	 <RelativeLayout
+	    android:layout_below="@id/gameview_player2"
+		android:layout_width="fill_parent"
+	   	android:layout_height="wrap_content" 
+	   	android:layout_centerHorizontal="true"
+	   	android:paddingBottom="5dp"
+	   	android:layout_marginBottom="1dp"
+	    >
+
+
+		<TextView
+		    android:id="@+id/gameview_p1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player1"
+			android:layout_centerHorizontal="true"
+		    android:textColor="@color/grey_text"
+		    android:padding="1dp"
+			/>
+		<TextView
+		    android:id="@+id/gameview_p2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player2"
+		    android:textColor="@color/grey_text"
+		    android:layout_below="@id/gameview_p1"
+			android:padding="1dp"
+		    android:layout_centerHorizontal="true"
+		     />
+		<TextView
+		    android:id="@+id/gameview_p3"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player3"
+		    android:layout_below="@id/gameview_p2"
+		    android:textColor="@color/grey_text"
+			android:padding="1dp"
+		   	android:layout_centerHorizontal="true"
+		     />
+		<TextView
+		    android:id="@+id/gameview_p4"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player4"
+		    android:layout_below="@id/gameview_p3"
+		    android:textColor="@color/grey_text"
+			android:padding="1dp"
+		   	android:layout_centerHorizontal="true"
+		     />
 	</RelativeLayout>
+	</RelativeLayout>
+
+
    	<RelativeLayout
 		android:layout_width="0dp"
 	   	android:layout_height="match_parent" 
 	   	android:background="@color/text_background"
 	   	android:layout_weight="2" >
+   		
 
+   		
    		<TextView
    		    android:id="@+id/gameview_current_theme"
    		    android:layout_width="wrap_content"
@@ -94,6 +152,16 @@
    		    android:layout_centerVertical="true"
    		    android:text="@string/gameview_current_theme"
    		    android:textColor="@color/grey_text" />
+   		<TextView
+   		    android:id="@+id/gameview_theme"
+   		    android:layout_width="wrap_content"
+   		    android:layout_height="wrap_content"
+   		    android:layout_above="@id/gameview_current_theme"
+   		    android:layout_centerHorizontal="true"
+   		    android:text="@string/gameview_theme"
+   		    android:textColor="@color/grey_text" />
+
+
 
 	</RelativeLayout>
 
