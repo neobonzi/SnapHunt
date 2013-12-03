@@ -47,12 +47,12 @@
     <string name="games_overview_game_invitations">Invitations</string>
     <string name="gameview_timeleft">0:00 Left</string>
     <string name="gameview_groupname">GroupName</string>
-    <string name="gameview_current_theme"></string>
+    <string name="gameview_current_theme">_</string>
     <string name="gameview_player">player</string>
-    <string name="gameview_player1">player1</string>
-    <string name="gameview_player2">player2</string>
-	<string name="gameview_player3">player3</string>
-	<string name="gameview_player4">player4</string>
+    <string name="gameview_player1">_</string>
+    <string name="gameview_player2">_</string>
+	<string name="gameview_player3">_</string>
+	<string name="gameview_player4">_</string>
 	
 	<string name="gameview_theme">Theme:</string>
         

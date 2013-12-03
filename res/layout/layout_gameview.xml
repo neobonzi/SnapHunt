@@ -11,7 +11,8 @@
 		android:layout_width="0dp"
 	   	android:layout_height="match_parent" 
 	   	android:background="@color/text_background"
-	   	android:layout_weight="1.2" >
+	   	android:layout_margin="1dp"
+	   	android:layout_weight="1.5" >
 
 		<TextView
 		    android:id="@+id/gameveiw_timeleft"
@@ -22,6 +23,45 @@
 		    android:layout_margin="5dp"
 		    android:text="@string/NULL"
 		    android:textColor="@color/grey_text" />
+				<TextView
+		    android:id="@+id/gameview_p1"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player1"
+			android:layout_centerHorizontal="true"
+		    android:textColor="@color/grey_text"
+		    android:padding="1dp"
+			/>
+		<TextView
+		    android:id="@+id/gameview_p2"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player2"
+		    android:textColor="@color/grey_text"
+		    android:layout_below="@id/gameview_p1"
+			android:padding="1dp"
+		    android:layout_centerHorizontal="true"
+		     />
+		<TextView
+		    android:id="@+id/gameview_p3"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player3"
+		    android:layout_below="@id/gameview_p2"
+		    android:textColor="@color/grey_text"
+			android:padding="1dp"
+		   	android:layout_centerHorizontal="true"
+		     />
+		<TextView
+		    android:id="@+id/gameview_p4"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:text="@string/gameview_player4"
+		    android:layout_below="@id/gameview_p3"
+		    android:textColor="@color/grey_text"
+			android:padding="1dp"
+		   	android:layout_centerHorizontal="true"
+		     />
 
 	</RelativeLayout>
 
@@ -41,7 +81,8 @@
 	        android:layout_margin="5dp"
 	        android:layout_centerHorizontal="true"
 	        android:text="@string/gameview_groupname"
-	        android:textColor="@color/grey_text" />
+	        android:textColor="@color/grey_text"
+	        android:textStyle="bold" />
 	
 	    <ImageView
 	        android:contentDescription="@string/gameview_player"
@@ -93,45 +134,7 @@
 	    >
 
 
-		<TextView
-		    android:id="@+id/gameview_p1"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/gameview_player1"
-			android:layout_centerHorizontal="true"
-		    android:textColor="@color/grey_text"
-		    android:padding="1dp"
-			/>
-		<TextView
-		    android:id="@+id/gameview_p2"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/gameview_player2"
-		    android:textColor="@color/grey_text"
-		    android:layout_below="@id/gameview_p1"
-			android:padding="1dp"
-		    android:layout_centerHorizontal="true"
-		     />
-		<TextView
-		    android:id="@+id/gameview_p3"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/gameview_player3"
-		    android:layout_below="@id/gameview_p2"
-		    android:textColor="@color/grey_text"
-			android:padding="1dp"
-		   	android:layout_centerHorizontal="true"
-		     />
-		<TextView
-		    android:id="@+id/gameview_p4"
-		    android:layout_width="wrap_content"
-		    android:layout_height="wrap_content"
-		    android:text="@string/gameview_player4"
-		    android:layout_below="@id/gameview_p3"
-		    android:textColor="@color/grey_text"
-			android:padding="1dp"
-		   	android:layout_centerHorizontal="true"
-		     />
+
 	</RelativeLayout>
 	</RelativeLayout>
 

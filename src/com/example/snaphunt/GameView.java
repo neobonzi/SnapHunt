@@ -33,7 +33,7 @@ public class GameView extends LinearLayout  {
 	}
 
 
-	private void setGame(Game game) {
+	public void setGame(Game game) {
 		this.game = game;
 		groupName.setText(game.getGroupName());
 		themeText.setText(game.getTheme());

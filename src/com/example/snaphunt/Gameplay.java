@@ -72,6 +72,7 @@ public class Gameplay extends Activity {
 		themeField = ((TextView)findViewById(R.id.gameplay_current_theme));
 		uid = intent.getIntExtra("uid", -1);
 		gameId = intent.getIntExtra("gameId", -1);
+		Log.d("snaphunt", "uid: " + uid + " gameID: " + gameId);
 		queue = Volley.newRequestQueue(this);
 		setTheme();
 		findPlayersSubmittedNotJudges();

@@ -1,8 +1,8 @@
 package com.example.snaphunt;
 
-<<<<<<< HEAD
 //Game object to inflate GameView layout object
 public class Game {
+	int id;
 	private String groupName;
 	private String theme;
 
@@ -15,14 +15,21 @@ public class Game {
 	private String p4;
 	
 	//fill in constructor. 
-	public Game(){
-		
+	public Game(int id, String groupName, String theme, String p1, String p2, String p3, String p4){
+		this.id = id;
+		this.groupName = groupName;
+		this.theme = theme;
+		this.p1 = p1;
+		this.p2 = p2;
+		this.p3 = p3;
+		this.p4 = p4;
 	}
 	
 	public void setJudge(int judge){
 		//check for validity?
 		currentJudge = judge;
 	}
+	
 	public void setTheme(String theme){
 		this.theme = theme;
 	}
@@ -45,6 +52,9 @@ public class Game {
 	public String getTheme(){
 		return this.theme;
 	}
+	public int getId(){
+		return this.id;
+	}
 
 	
 	@Override
@@ -60,35 +70,5 @@ public class Game {
 					this.p4 == game2.p4);
 		}
 		return false;
-=======
-public class Game {
-
-	String id, p1username, p2username, p3username, p4username, groupName, theme;
-	Game() {
-
-	}
-	public String getp1name() {
-		return p1username;
-	}
-
-	public String getp2name() {
-		return p2username;
-	}
-
-	public String getp3name() {
-		return p3username;
-	}
-
-	public String getp4name() {
-		return p4username;
-	}
-
-	public String getGroupName() {
-		return groupName;
-	}
-
-	public String getId() {
-		return id;
->>>>>>> bb1ac7d0cadb1ef9a35f6562140c0cb22b1a26c1
 	}
 }

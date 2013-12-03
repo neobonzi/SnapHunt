@@ -243,7 +243,7 @@
 		        android:layout_margin="10dp"
 		        android:layout_marginBottom="20dp"
 		        android:alpha="0.95"
-		        android:background="@color/login_button_background"
+		        android:background="@drawable/button_background_with_border"
 		        android:clickable="true"
 		        android:onClick="startThemePicker"
 		        android:text="@string/create_game_button_start"

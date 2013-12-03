@@ -3,6 +3,7 @@ package com.example.snaphunt;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -19,6 +20,7 @@ import com.google.gson.reflect.TypeToken;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.app.ListActivity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.util.Log;
@@ -26,56 +28,89 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 
 
 public class GamesOverview extends Activity {
 
-	protected LinearLayout gameView;
+	protected ListView gameView;
+	protected ListView gameInvitesView;
+
 	protected int uid;
 	protected int gameId;
 	protected ArrayList<Game> games;
 	protected ArrayList<Game> invites;
 	protected String ServerRoot = "http://regal-airway-412.appspot.com/";
 	protected RequestQueue queue;
+	protected GamesOverviewAdapter gamesOverviewAdapter;
+	protected GamesOverviewInvitesAdapter gamesOverviewInvitesAdapter;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_games_overview);
-		View jokeView = new View(this.getBaseContext());
-		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
+		
+//		View jokeView = new View(this.getBaseContext());
+//		View jokeView1 = new View(this.getBaseContext());
+//
+//		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
+//		jokeView1.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overvew_games_list));
+//
+//		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
+//		jokeView.inflate(this, R.layout.layout_gameview,(ViewGroup) findViewById(R.id.games_overview_invitations_list));
 
 		Intent intent = getIntent();
 		uid = intent.getIntExtra("uid", -1);
 		queue = Volley.newRequestQueue(this);
-		gameView = (LinearLayout) findViewById(R.id.games_overvew_games_list);
+		gameView = (ListView) findViewById(R.id.games_overvew_games_list);
+		gameInvitesView = (ListView) findViewById(R.id.games_overview_invitations_list);
 		games = new ArrayList<Game>();
 		invites = new ArrayList<Game>();
+		
+		gamesOverviewAdapter = new GamesOverviewAdapter(this, games);
+		gameView.setAdapter(gamesOverviewAdapter);
+		
+		gamesOverviewInvitesAdapter = new GamesOverviewInvitesAdapter(this, invites);
+		gameInvitesView.setAdapter(gamesOverviewInvitesAdapter);
+		
 		fillGames();
 		fillInvites();
-		gameView.setOnClickListener(new OnClickListener() {
+		
+		gameView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
-			public void onClick(View arg0) {
-				Log.d("SnapHunt_GamesOverview","view clicked "+ arg0.getId());
+			public void onItemClick(AdapterView<?> parent, View view, int position,
+					long id) {
+				Log.d("SnapHunt_GamesOverview","view: "+ view + " pos: "+ position + "id: " + id);
+				Log.d("SnapHunt_GamesOverview","gameID: " + games.get(position).getId());
+
 				Intent intent = new Intent(getBaseContext(), Gameplay.class);
-				intent.putExtra("Game_ID", arg0.getId());
+				intent.putExtra("gameId", games.get(position).getId());
+				intent.putExtra("uid", uid);
 				startActivity(intent);
+				
 			}
+
 		});
 	}
 
 	private void invitesFilled() {
-
+		gamesOverviewInvitesAdapter.notifyDataSetChanged();
 	}
 
 	private void gamesFilled() {
-
+		gamesOverviewAdapter.notifyDataSetChanged();
 	}
 
 	private void fillInvites() {
+
 		String url = ServerRoot + "getPlayerInvites?id=" + uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
@@ -84,9 +119,19 @@ public class GamesOverview extends Activity {
 							try {
 								JSONArray invitesJson = response.getJSONArray("invites");
 								if(invitesJson.length() > 0) {
-									Gson gson = new Gson();
-									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
-									invites = gson.fromJson(invitesJson.toString(), token.getType());
+//									Gson gson = new Gson();
+//									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
+//									invites = gson.fromJson(invitesJson.toString(), token.getType());
+									for(int i = 0; i < invitesJson.length();i++){
+										JSONObject json = (JSONObject)invitesJson.getJSONObject(i);
+										invites.add(new Game(json.getInt("id"),
+												json.getString("groupName"),
+												json.getString("theme"),
+												json.getString("p1username"),
+												json.getString("p2username"),
+												json.getString("p3username"),
+												json.getString("p4username")));
+									}
 								}
 								invitesFilled();
 							} catch (JSONException e) {
@@ -110,10 +155,23 @@ public class GamesOverview extends Activity {
 					public void onResponse(JSONObject response) {
 							try {
 								JSONArray gamesJson = response.getJSONArray("games");
+								Log.d("snaphunt", "json: " + gamesJson.toString());
+								
 								if(gamesJson.length() > 0) {
-									Gson gson = new Gson();
-									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
-									games = gson.fromJson(gamesJson.toString(), token.getType());
+//									Gson gson = new Gson();
+//									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
+//									games = gson.fromJson(gamesJson.toString(), token.getType());
+									
+									for(int i = 0; i < gamesJson.length();i++){
+										JSONObject json = (JSONObject)gamesJson.getJSONObject(i);
+										games.add(new Game(json.getInt("id"),
+												json.getString("groupName"),
+												json.getString("theme"),
+												json.getString("p1username"),
+												json.getString("p2username"),
+												json.getString("p3username"),
+												json.getString("p4username")));
+									}
 								}
 								gamesFilled();
 							} catch (JSONException e) {
