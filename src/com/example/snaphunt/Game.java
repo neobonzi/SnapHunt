@@ -2,17 +2,11 @@ package com.example.snaphunt;
 
 //Game object to inflate GameView layout object
 public class Game {
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	int id;
 	private String groupName;
 	private String theme;
-=======
-	public int myint = 0;
->>>>>>> 8d103c88ef582ec542c9984badd605e1c3f70435
-=======
-	public int myint = 0;
->>>>>>> 8d103c88ef582ec542c9984badd605e1c3f70435
+
 
 
 	//player id?

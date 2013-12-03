@@ -34,8 +34,7 @@ public class Welcome extends Activity {
 	String ServerRoot = "http://regal-airway-412.appspot.com/";
 	URL basePath;
 	int gameId;
-	Integer uid;
-	boolean isJudge = true;
+	int uid;
 	RequestQueue queue;
 
 	EditText m_username;
@@ -71,60 +70,7 @@ public class Welcome extends Activity {
         startActivity(intent);
     }
 
-    public void routeJudge() {
-    	isJudge = true;
-    	winnerPickedCheck();
-    }
-
-    public void routePlayer() {
-    	isJudge = false;
-    	winnerPickedCheck();
-    }
-
-    public void routeUser(Integer uid) {
-    	this.uid = uid;
-    	startGamesOverview();
-    }
-
-    public void winnerPickedCheck() {
-    	String url = ServerRoot + "judgePickCheck?gameId="+gameId;
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-				new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						try {
-							Boolean judgePicked = response.getBoolean("picked");
-							if(judgePicked){
-								Intent intent = new Intent(getBaseContext(), RoundSummary.class);
-								intent.putExtra("uid", uid);
-								intent.putExtra("gameId", gameId);
-								startActivity(intent);
-							} else if (isJudge) {
-								Intent intent = new Intent(getBaseContext(), GameplayJudge.class);
-								intent.putExtra("uid", uid);
-								intent.putExtra("gameId", gameId);
-								startActivity(intent);
-							} else {
-								Intent intent = new Intent(getBaseContext(), Gameplay.class);
-								intent.putExtra("uid", uid);
-								intent.putExtra("gameId", gameId);
-								startActivity(intent);
-							}
-						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					public void onErrorResponse(VolleyError error) {
-						Log.e("error",error.toString());
-					}
-				});
-		queue.add(jsObjRequest);
-    }
+    
 
     private void startGamesOverview() {
         Intent intent = new Intent(this, GamesOverview.class);
@@ -132,60 +78,7 @@ public class Welcome extends Activity {
         startActivity(intent);
     }
 
-    private void judgeCheck(int gameId) {
-		String url = ServerRoot + "judgeCheck?uid="+uid+"&gameId="+gameId;
-		this.gameId = gameId;
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-				new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						try {
-							Boolean isJudge = response.getBoolean("isJudge");
-							if(isJudge){
-								routeJudge();
-							} else {
-								routePlayer();
-							}
-						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					public void onErrorResponse(VolleyError error) {
-						Log.e("error",error.toString());
-					}
-				});
-		queue.add(jsObjRequest);
-	}
-
-	private void getPlayerGameId() {
-		String url = ServerRoot + "getPlayerGameId?id="+uid;
-		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-				new Response.Listener<JSONObject>() {
-					@Override
-					public void onResponse(JSONObject response) {
-						try {
-							judgeCheck(Integer.parseInt((String)response.get("id")));
-						} catch (NumberFormatException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						} catch (JSONException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-					}
-				}, new Response.ErrorListener() {
-					public void onErrorResponse(VolleyError error) {
-						Log.e("error",error.toString());
-					}
-				});
-		queue.add(jsObjRequest);
-	}
-
+    
     /* Returns the userid given a username and password */
     public void login(String username, String password) {
     	String url = ServerRoot + "login?username="+username+"&password="+password;
@@ -194,7 +87,8 @@ public class Welcome extends Activity {
 					@Override
 					public void onResponse(JSONObject response) {
 						try {
-							routeUser(Integer.parseInt((String)response.get("id")));
+							uid = response.getInt("id");
+							startGamesOverview();
 						} catch (JSONException e) {
 							e.printStackTrace();
 						}

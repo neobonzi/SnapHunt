@@ -51,6 +51,9 @@ public class GamesOverview extends Activity {
 	protected RequestQueue queue;
 	protected GamesOverviewAdapter gamesOverviewAdapter;
 	protected GamesOverviewInvitesAdapter gamesOverviewInvitesAdapter;
+	
+	boolean isJudge = true;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -83,12 +86,7 @@ public class GamesOverview extends Activity {
 	@Override
 	protected void onResume(){
 		super.onResume();
-		if(games.size() > 0 && invites.size() > 0){
-			gameView.removeAllViewsInLayout();
-			gameInvitesView.removeAllViewsInLayout();
-			fillGames();
-			fillInvites();
-		}
+
 	}
 
 	private void initListeners() {
@@ -100,10 +98,9 @@ public class GamesOverview extends Activity {
 				Log.d("SnapHunt_GamesOverview","view: "+ view + " pos: "+ position + "id: " + id);
 				Log.d("SnapHunt_GamesOverview","gameID: " + games.get(position).getId());
 
-				Intent intent = new Intent(getBaseContext(), Gameplay.class);
-				intent.putExtra("gameId", games.get(position).getId());
-				intent.putExtra("uid", uid);
-				startActivity(intent);
+
+				gameId = games.get(position).getId();
+				judgeCheck();
 				
 			}
 
@@ -117,16 +114,42 @@ public class GamesOverview extends Activity {
 				Log.d("SnapHunt_GamesOverview","view: "+ view + " pos: "+ position + "id: " + id);
 				Log.d("SnapHunt_GamesOverview","gameID: " + invites.get(position).getId());
 
-				Intent intent = new Intent(getBaseContext(), Gameplay.class);
-				intent.putExtra("gameId", invites.get(position).getId());
-				intent.putExtra("uid", uid);
-				startActivity(intent);
-				
+				gameId = invites.get(position).getId(); 
+				confirmPlayer();
 			}
+
+
 
 		});		
 	}
-
+	
+	private void confirmPlayerResult() {
+		Intent intent = new Intent(getBaseContext(), Gameplay.class);
+		intent.putExtra("gameId", gameId);
+		intent.putExtra("uid", uid);
+		startActivity(intent);
+	}
+	private void confirmPlayer() {
+		String url = ServerRoot + "joinGame?uid=" + uid +"&gameId=" + gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							Log.d("snaphunt","returned gameId: " + response.getInt("gameId"));
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+						confirmPlayerResult();
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);		
+	}
 	private void invitesFilled() {
 		gamesOverviewInvitesAdapter.notifyDataSetChanged();
 	}
@@ -246,5 +269,84 @@ public class GamesOverview extends Activity {
         intent.putExtra("uid", uid);
         startActivity(intent);
     }
+    
+    public void routeJudge() {
+    	isJudge = true;
+    	winnerPickedCheck();
+    }
+
+    public void routePlayer() {
+    	isJudge = false;
+    	winnerPickedCheck();
+    }
+
+    public void winnerPickedCheck() {
+    	String url = ServerRoot + "judgePickCheck?gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							Boolean judgePicked = response.getBoolean("picked");
+							if(judgePicked){
+								Intent intent = new Intent(getBaseContext(), RoundSummary.class);
+								intent.putExtra("uid", uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							} else if (isJudge) {
+								Intent intent = new Intent(getBaseContext(), GameplayJudge.class);
+								intent.putExtra("uid", uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							} else {
+								Intent intent = new Intent(getBaseContext(), Gameplay.class);
+								intent.putExtra("uid", uid);
+								intent.putExtra("gameId", gameId);
+								startActivity(intent);
+							}
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+    }
+    
+    private void judgeCheck() {
+		String url = ServerRoot + "judgeCheck?uid="+uid+"&gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							Boolean isJudge = response.getBoolean("isJudge");
+							if(isJudge){
+								routeJudge();
+							} else {
+								routePlayer();
+							}
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
 
 }
