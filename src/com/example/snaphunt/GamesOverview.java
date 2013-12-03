@@ -67,6 +67,13 @@ public class GamesOverview extends Activity {
 		});
 	}
 
+	private void invitesFilled() {
+
+	}
+
+	private void gamesFilled() {
+
+	}
 
 	private void fillInvites() {
 		String url = ServerRoot + "getPlayerInvites?id=" + uid;
@@ -81,6 +88,7 @@ public class GamesOverview extends Activity {
 									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
 									invites = gson.fromJson(invitesJson.toString(), token.getType());
 								}
+								invitesFilled();
 							} catch (JSONException e) {
 								// TODO Auto-generated catch block
 								e.printStackTrace();
@@ -107,6 +115,7 @@ public class GamesOverview extends Activity {
 									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
 									games = gson.fromJson(gamesJson.toString(), token.getType());
 								}
+								gamesFilled();
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}
