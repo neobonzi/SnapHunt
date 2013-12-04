@@ -51,7 +51,7 @@ public class GamesOverview extends Activity {
 	protected RequestQueue queue;
 	protected GamesOverviewAdapter gamesOverviewAdapter;
 	protected GamesOverviewInvitesAdapter gamesOverviewInvitesAdapter;
-	
+
 	boolean isJudge = true;
 
 
@@ -68,21 +68,21 @@ public class GamesOverview extends Activity {
 		gameInvitesView = (ListView) findViewById(R.id.games_overview_invitations_list);
 		games = new ArrayList<Game>();
 		invites = new ArrayList<Game>();
-		
+
 		gamesOverviewAdapter = new GamesOverviewAdapter(this, games);
 		gameView.setAdapter(gamesOverviewAdapter);
-		
+
 		gamesOverviewInvitesAdapter = new GamesOverviewInvitesAdapter(this, invites);
 		gameInvitesView.setAdapter(gamesOverviewInvitesAdapter);
-		
+
 		fillGames();
 		fillInvites();
-		
+
 		initListeners();
-		
+
 
 	}
-	
+
 	@Override
 	protected void onResume(){
 		super.onResume();
@@ -101,11 +101,11 @@ public class GamesOverview extends Activity {
 
 				gameId = games.get(position).getId();
 				judgeCheck();
-				
+
 			}
 
 		});
-		
+
 		gameInvitesView.setOnItemClickListener(new OnItemClickListener() {
 
 			@Override
@@ -114,15 +114,15 @@ public class GamesOverview extends Activity {
 				Log.d("SnapHunt_GamesOverview","view: "+ view + " pos: "+ position + "id: " + id);
 				Log.d("SnapHunt_GamesOverview","gameID: " + invites.get(position).getId());
 
-				gameId = invites.get(position).getId(); 
+				gameId = invites.get(position).getId();
 				confirmPlayer();
 			}
 
 
 
-		});		
+		});
 	}
-	
+
 	private void confirmPlayerResult() {
 		Intent intent = new Intent(getBaseContext(), Gameplay.class);
 		intent.putExtra("gameId", gameId);
@@ -148,7 +148,7 @@ public class GamesOverview extends Activity {
 						Log.e("error",error.toString());
 					}
 				});
-		queue.add(jsObjRequest);		
+		queue.add(jsObjRequest);
 	}
 	private void invitesFilled() {
 		gamesOverviewInvitesAdapter.notifyDataSetChanged();
@@ -196,7 +196,38 @@ public class GamesOverview extends Activity {
 		queue.add(jsObjRequest);
 	}
 
-	private void fillGames() {		
+	private void executeRandomGame(int gameId) {
+		Intent intent = new Intent(this, Gameplay.class);
+		intent.putExtra("uid", uid);
+		intent.putExtra("gameId", gameId);
+		startActivity(intent);
+	}
+
+	public void joinRandomGame(View view) {
+		String url = ServerRoot + "joinRandomGame?uid=" + uid;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+							try {
+								if(response.getBoolean("error")) {
+									Toast.makeText(getBaseContext(), "Sorry, no random games open!", Toast.LENGTH_LONG).show();
+								} else {
+									executeRandomGame(response.getInt("gameId"));
+								}
+							} catch (JSONException e) {
+								e.printStackTrace();
+							}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);
+	}
+
+	private void fillGames() {
 		games.clear();
 		String url = ServerRoot + "getPlayerGames?id=" + uid;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
@@ -206,12 +237,12 @@ public class GamesOverview extends Activity {
 							try {
 								JSONArray gamesJson = response.getJSONArray("games");
 								Log.d("snaphunt", "json: " + gamesJson.toString());
-								
+
 								if(gamesJson.length() > 0) {
 //									Gson gson = new Gson();
 //									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
 //									games = gson.fromJson(gamesJson.toString(), token.getType());
-									
+
 									for(int i = 0; i < gamesJson.length();i++){
 										JSONObject json = (JSONObject)gamesJson.getJSONObject(i);
 										games.add(new Game(json.getInt("id"),
@@ -269,7 +300,7 @@ public class GamesOverview extends Activity {
         intent.putExtra("uid", uid);
         startActivity(intent);
     }
-    
+
     public void routeJudge() {
     	isJudge = true;
     	winnerPickedCheck();
@@ -319,7 +350,7 @@ public class GamesOverview extends Activity {
 				});
 		queue.add(jsObjRequest);
     }
-    
+
     private void judgeCheck() {
 		String url = ServerRoot + "judgeCheck?uid="+uid+"&gameId="+gameId;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
