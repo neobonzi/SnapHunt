@@ -31,7 +31,7 @@
     <string name="create_game_player2_button_text">P2</string>
     <string name="create_game_player3_buttont_text">P3</string>
     <string name="create_game_enter_username">Enter Username</string>
-    <string name="create_game_enter_username_hint">Enter username or leave blank for random!</string>
+    <string name="create_game_enter_username_hint">Enter username</string>
     <string name="create_game_round_length">Round Length [Hours]</string>
     <string name="create_game_round_length_opt_1">4</string>
     <string name="create_game_round_length_opt_2">12</string>
@@ -64,9 +64,11 @@
 
     <string name="gameplay_timeleft"></string>
 
-    <string name="gameplay_theme">Playing "theme"</string>
-
-    <string name="gameplay_judge">Pick your favorite!</string>
+    <string name="gameplay_playing">Playing: </string>
+    <string name="gameplay_theme">"theme"</string>
+    
+    <string name="gameplay_judge_wait">Waiting for all players to submit!</string>
+    <string name="gameplay_judge_ready">Pick your favorite!</string>
     <string name="gameplay_judge_submit_button">Submit</string>
 
     <string name="round_summary_done_button">Done</string>

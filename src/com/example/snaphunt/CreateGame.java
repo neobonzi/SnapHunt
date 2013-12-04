@@ -61,9 +61,14 @@ public class CreateGame extends Activity {
 		createGameField = (EditText)findViewById(R.id.create_game_group_name_text);
 		enterNameHeader = (TextView)findViewById(R.id.create_game_enter_username);
 		enterNameHeader.setVisibility(View.GONE);
+
 		p1PickBtn = (ImageButton)findViewById(R.id.create_game_player1);
 		p2PickBtn = (ImageButton)findViewById(R.id.create_game_player2);
-		p3PickBtn = (ImageButton)findViewById(R.id.create_game_player3);
+		p3PickBtn = (ImageButton)findViewById(R.id.create_game_player3);		
+		p1PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+		p2PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+		p3PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+		
 		p1uname = (EditText)findViewById(R.id.create_game_p1uname);
 		p2uname = (EditText)findViewById(R.id.create_game_p2uname);
 		p3uname = (EditText)findViewById(R.id.create_game_p3uname);
@@ -81,6 +86,9 @@ public class CreateGame extends Activity {
 				p1uname.setVisibility(View.VISIBLE);
 				p2uname.setVisibility(View.GONE);
 				p3uname.setVisibility(View.GONE);
+				p1PickBtn.setBackgroundColor(getResources().getColor(R.color.login_button_background));
+				p2PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+				p3PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
 			}
 		});
 		p2PickBtn.setOnClickListener(new OnClickListener() {
@@ -91,6 +99,9 @@ public class CreateGame extends Activity {
 				p1uname.setVisibility(View.GONE);
 				p2uname.setVisibility(View.VISIBLE);
 				p3uname.setVisibility(View.GONE);
+				p1PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+				p2PickBtn.setBackgroundColor(getResources().getColor(R.color.login_button_background));
+				p3PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
 			}
 		});
 		p3PickBtn.setOnClickListener(new OnClickListener() {
@@ -101,6 +112,9 @@ public class CreateGame extends Activity {
 				p1uname.setVisibility(View.GONE);
 				p2uname.setVisibility(View.GONE);
 				p3uname.setVisibility(View.VISIBLE);
+				p1PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+				p2PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+				p3PickBtn.setBackgroundColor(getResources().getColor(R.color.login_button_background));
 			}
 		});
 	}
@@ -167,6 +181,7 @@ public class CreateGame extends Activity {
 		String p1UnameTxt = p1uname.getText().toString();
 		String p2UnameTxt = p2uname.getText().toString();
 		String p3UnameTxt = p3uname.getText().toString();
+		
 		String url = ServerRoot + "verifyPlayers?p1=" + p1UnameTxt + "&p2=" + p2UnameTxt + "&p3=" + p3UnameTxt;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
@@ -176,24 +191,39 @@ public class CreateGame extends Activity {
 							boolean p1Valid = response.getBoolean("p1Valid");
 							boolean p2Valid = response.getBoolean("p2Valid");
 							boolean p3Valid = response.getBoolean("p3Valid");
-
+							p1PickBtn.setBackgroundColor(getResources().getColor(R.color.ok_green));
+							p2PickBtn.setBackgroundColor(getResources().getColor(R.color.ok_green));
+							p3PickBtn.setBackgroundColor(getResources().getColor(R.color.ok_green));
+							
 							if(p1Valid && p2Valid && p3Valid) {
 								Toast.makeText(getBaseContext(), "Great! Starting Game!", Toast.LENGTH_SHORT).show();
 								startNewGame(p1uname.getText().toString(),
 										p2uname.getText().toString(),
 										p3uname.getText().toString());
 							} else {
+								String players = "";
 								if(!p1Valid) {
-									Toast.makeText(getBaseContext(),  p1uname.getText().toString() + " couldn't be found", Toast.LENGTH_SHORT).show();
+									players += p1uname.getText().toString() + " ";
+									//Toast.makeText(getBaseContext(),  p1uname.getText().toString() + " couldn't be found", Toast.LENGTH_SHORT).show();
+									p1PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
 								}
 
 								if(!p2Valid) {
-									Toast.makeText(getBaseContext(),  p2uname.getText().toString() + " couldn't be found", Toast.LENGTH_SHORT).show();
+									players += p2uname.getText().toString() + " ";
+									//Toast.makeText(getBaseContext(),  p2uname.getText().toString() + " couldn't be found", Toast.LENGTH_SHORT).show();
+									p2PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+
 								}
 
 								if(!p3Valid) {
-									Toast.makeText(getBaseContext(),  p3uname.getText().toString() + " couldn't be found", Toast.LENGTH_SHORT).show();
+									players += p3uname.getText().toString() + " ";
+									//Toast.makeText(getBaseContext(),  p3uname.getText().toString() + " couldn't be found", Toast.LENGTH_SHORT).show();
+									p3PickBtn.setBackgroundColor(getResources().getColor(R.color.grey));
+
 								}
+								
+								Toast.makeText(getBaseContext(), "Users not registered: " + players, Toast.LENGTH_SHORT).show();
+
 							}
 						} catch (JSONException e) {
 							// TODO Auto-generated catch block
