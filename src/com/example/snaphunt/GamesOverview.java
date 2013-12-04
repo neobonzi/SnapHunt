@@ -210,7 +210,11 @@ public class GamesOverview extends Activity {
 					@Override
 					public void onResponse(JSONObject response) {
 							try {
-								executeRandomGame(response.getInt("gameId"));
+								if(response.getBoolean("error")) {
+									Toast.makeText(getBaseContext(), "Sorry, no random games open!", Toast.LENGTH_LONG).show();
+								} else {
+									executeRandomGame(response.getInt("gameId"));
+								}
 							} catch (JSONException e) {
 								e.printStackTrace();
 							}

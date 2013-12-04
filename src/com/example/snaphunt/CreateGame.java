@@ -146,7 +146,7 @@ public class CreateGame extends Activity {
 					@Override
 					public void onResponse(JSONObject response) {
 						try {
-							Intent intent = new Intent(getBaseContext(),Gameplay.class);
+							Intent intent = new Intent(getBaseContext(),GameplayJudge.class);
 							intent.putExtra("gameId", response.getInt("gameId"));
 							intent.putExtra("uid", uid);
 							startActivity(intent);
