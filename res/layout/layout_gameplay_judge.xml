@@ -13,35 +13,34 @@
 		android:focusableInTouchMode="true"
 		android:windowSoftInputMode="stateHidden" >
 
-	    <RelativeLayout
-	        android:layout_width="match_parent"
-	        android:layout_height="0dp"
-	        android:layout_weight=".5" >
+		<RelativeLayout
+		    android:layout_width="match_parent"
+		    android:layout_height="0dp"
+		    android:layout_weight=".5" >
 
-	        <TextView
-	            android:id="@+id/gameplay_judge_current_theme"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_alignParentTop="true"
-	            android:layout_centerHorizontal="true"
-	            android:text="@string/gameplay_theme"
-	            android:layout_marginTop="15dp"
-	            android:textColor="@color/grey_text"
-	            />
+		    <TextView
+		        android:id="@+id/gameplay_judge_playing"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_alignParentTop="true"
+		        android:layout_centerHorizontal="true"
+		        android:layout_marginTop="15dp"
+		        android:text="@string/gameplay_playing"
+		        android:textColor="@color/grey_text" />
 
-	        <TextView
-	            android:id="@+id/gameplay_judge_pick"
-	            android:layout_width="wrap_content"
-	            android:layout_height="wrap_content"
-	            android:layout_below="@id/gameplay_judge_current_theme"
-	            android:layout_centerHorizontal="true"
-	            android:layout_margin="5dp"
-	            android:text="@string/gameplay_judge"
-	            android:textColor="@color/grey_text"
-	            android:textStyle="bold" />
+		    <TextView
+		        android:id="@+id/gameplay_judge_current_theme"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:layout_centerHorizontal="true"
+		        android:layout_below="@id/gameplay_judge_playing"
+		        android:layout_centerVertical="true"
+		        android:layout_marginTop="5dp"
+		        android:text="@string/gameplay_theme"
+		        android:textColor="@color/grey_text"
+		        android:textStyle="bold" />
 
-	    </RelativeLayout>
-
+		</RelativeLayout>
 
 	   	<RelativeLayout
         android:layout_width="match_parent"
@@ -93,6 +92,17 @@
 	        android:layout_width="match_parent"
 	        android:layout_height="0dp"
 	        android:layout_weight=".5" >
+	      <TextView
+		        android:id="@+id/gameplay_judge_pick"
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+				android:layout_centerVertical="true"
+		        android:layout_centerHorizontal="true"
+		        android:paddingBottom="5dp"
+		        android:paddingTop="5dp"
+		        android:text="@string/gameplay_judge_wait"
+		        android:textColor="@color/wait_red"
+		        android:textStyle="bold" />
 
 	    </RelativeLayout>
 

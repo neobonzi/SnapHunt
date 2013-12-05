@@ -5,9 +5,11 @@ import java.net.URL;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
+import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
@@ -37,6 +39,7 @@ public class Welcome extends Activity {
 	int uid;
 	RequestQueue queue;
 
+	Button m_loginButton;
 	EditText m_username;
 	EditText m_password;
 
@@ -50,6 +53,7 @@ public class Welcome extends Activity {
         setContentView(R.layout.layout_welcome);
 
         /* Set the view elements */
+        m_loginButton = (Button)findViewById(R.id.loginButton);
         m_username = ((EditText)findViewById(R.id.loginUsername));
         m_password = ((EditText)findViewById(R.id.loginPassword));
         queue = Volley.newRequestQueue(this);
@@ -59,7 +63,9 @@ public class Welcome extends Activity {
 			public void onClick(View v) {
 				String username = m_username.getText().toString();
 				String password = m_password.getText().toString();
+				m_loginButton.setClickable(false);
 				login(username, password);
+				
 			}
         });
     }
@@ -73,6 +79,8 @@ public class Welcome extends Activity {
     
 
     private void startGamesOverview() {
+		m_loginButton.setClickable(true);
+
         Intent intent = new Intent(this, GamesOverview.class);
         intent.putExtra("uid", this.uid);
         startActivity(intent);
@@ -95,7 +103,9 @@ public class Welcome extends Activity {
 					}
 				}, new Response.ErrorListener() {
 					public void onErrorResponse(VolleyError error) {
-						Toast.makeText(getBaseContext(), error.toString(), Toast.LENGTH_LONG).show();
+						Toast.makeText(getBaseContext(), "Invalid username/password", Toast.LENGTH_LONG).show();
+						m_loginButton.setClickable(true);
+
 					}
 				});
 		queue.add(jsObjRequest);

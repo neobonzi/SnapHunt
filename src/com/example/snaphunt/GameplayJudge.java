@@ -36,11 +36,15 @@ public class GameplayJudge extends Activity {
 	private TextView themeField;
 	private HashMap<Integer,Integer> idsToPics;
 	private Integer judgePick;
+	private boolean allSubmited = false;
+	private TextView pickText;
+	private ArrayList<Integer> submittedIds;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.layout_gameplay_judge);
+		pickText = (TextView)findViewById(R.id.gameplay_judge_pick);
 		themeField = ((TextView)findViewById(R.id.gameplay_judge_current_theme));
 		idsToPics = new HashMap<Integer,Integer>();
 		setListeners();
@@ -51,6 +55,43 @@ public class GameplayJudge extends Activity {
 		queue = Volley.newRequestQueue(this);
 		setTheme();
 		findPlayersSubmittedNotJudges();
+
+	}
+	private void checkPlayersSubmitted() {
+		String url = ServerRoot + "getSubmitStatus?gameId="+gameId;
+		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
+				new Response.Listener<JSONObject>() {
+					@Override
+					public void onResponse(JSONObject response) {
+						try {
+							int judge = response.getInt("judge");
+							boolean ready = true;
+							for(int i = 1; i < 5; i++){
+								if (i != judge){
+									String player = "p" + i + "Submit"; 
+									Log.d("snaphunt", "player: " + player);
+									if (response.getInt(player) == 0) ready = false;
+								}
+							}
+							if(ready){
+								allSubmited = true;
+								pickText.setText(R.string.gameplay_judge_ready);
+							}
+							
+						} catch (NumberFormatException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						} catch (JSONException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+					}
+				}, new Response.ErrorListener() {
+					public void onErrorResponse(VolleyError error) {
+						Log.e("error",error.toString());
+					}
+				});
+		queue.add(jsObjRequest);		
 	}
 	private void updateTheme(String theme) {
 		themeField.setText(theme);
@@ -64,7 +105,9 @@ public class GameplayJudge extends Activity {
 					@Override
 					public void onResponse(JSONObject response) {
 						try {
+							checkPlayersSubmitted();
 							updateTheme(response.getString("theme"));
+
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -88,22 +131,28 @@ public class GameplayJudge extends Activity {
 		player1pic.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				judgePick = idsToPics.get(Integer.valueOf(1));
-				setJudgePick(idsToPics.get(Integer.valueOf(1)));
+				if(allSubmited){
+					judgePick = idsToPics.get(Integer.valueOf(1));
+					setJudgePick(idsToPics.get(Integer.valueOf(1)));				
+				}
 			}});
 
 		player2pic.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				judgePick = idsToPics.get(Integer.valueOf(2));
-				setJudgePick(idsToPics.get(Integer.valueOf(2)));
+				if(allSubmited){
+					judgePick = idsToPics.get(Integer.valueOf(2));
+					setJudgePick(idsToPics.get(Integer.valueOf(2)));
+				}
 			}});
 
 		player3pic.setOnClickListener(new OnClickListener(){
 			@Override
 			public void onClick(View arg0) {
-				judgePick = idsToPics.get(Integer.valueOf(3));
-				setJudgePick(judgePick);
+				if(allSubmited){
+					judgePick = idsToPics.get(Integer.valueOf(3));
+					setJudgePick(judgePick);
+				}
 			}});
 	}
 
@@ -115,6 +164,7 @@ public class GameplayJudge extends Activity {
 	}
 
 	private void setJudgePick(Integer judgePick) {
+		
 		String url = ServerRoot + "judgePick?gameId="+gameId+"&winnerId="+judgePick;
 		JsonObjectRequest jsObjRequest = new JsonObjectRequest(Request.Method.GET, url, null,
 				new Response.Listener<JSONObject>() {
@@ -210,11 +260,12 @@ public class GameplayJudge extends Activity {
 					public void onResponse(JSONObject response) {
 						try {
 							JSONArray jsonArray = response.getJSONArray("ids");
-							ArrayList<Integer> submittedIds = new ArrayList<Integer>();
+							submittedIds = new ArrayList<Integer>();
 							for(int i = 0; i < jsonArray.length(); i++) {
 								submittedIds.add(jsonArray.getJSONObject(i).getInt("id"));
 							}
 							setImagesForPlayers(submittedIds);
+
 						} catch (NumberFormatException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();

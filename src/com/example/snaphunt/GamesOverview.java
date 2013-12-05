@@ -168,9 +168,6 @@ public class GamesOverview extends Activity {
 							try {
 								JSONArray invitesJson = response.getJSONArray("invites");
 								if(invitesJson.length() > 0) {
-//									Gson gson = new Gson();
-//									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
-//									invites = gson.fromJson(invitesJson.toString(), token.getType());
 									for(int i = 0; i < invitesJson.length();i++){
 										JSONObject json = (JSONObject)invitesJson.getJSONObject(i);
 										invites.add(new Game(json.getInt("id"),
@@ -239,10 +236,6 @@ public class GamesOverview extends Activity {
 								Log.d("snaphunt", "json: " + gamesJson.toString());
 
 								if(gamesJson.length() > 0) {
-//									Gson gson = new Gson();
-//									TypeToken<List<Game>> token = new TypeToken<List<Game>>(){};
-//									games = gson.fromJson(gamesJson.toString(), token.getType());
-
 									for(int i = 0; i < gamesJson.length();i++){
 										JSONObject json = (JSONObject)gamesJson.getJSONObject(i);
 										games.add(new Game(json.getInt("id"),
