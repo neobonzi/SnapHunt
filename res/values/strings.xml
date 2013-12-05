@@ -75,7 +75,9 @@
 
 	<string name="snap_hunt_SNAP">Snap</string>
 	<string name="snap_hunt_HUNT">Hunt</string>
-
+	
+	<string name="actives">Active</string>
+	<string name="invites">Invites</string>
 
 	<string name="NULL"></string>
 

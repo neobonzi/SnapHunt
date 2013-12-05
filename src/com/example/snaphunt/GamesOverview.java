@@ -30,9 +30,11 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
@@ -43,6 +45,11 @@ public class GamesOverview extends Activity {
 	protected ListView gameView;
 	protected ListView gameInvitesView;
 
+	protected RelativeLayout activesLayout;
+	protected RelativeLayout invitesLayout;
+	
+	protected Button showActiveButton;
+	protected Button showInvitesButton;
 	protected int uid;
 	protected int gameId;
 	protected ArrayList<Game> games;
@@ -66,6 +73,15 @@ public class GamesOverview extends Activity {
 		queue = Volley.newRequestQueue(this);
 		gameView = (ListView) findViewById(R.id.games_overvew_games_list);
 		gameInvitesView = (ListView) findViewById(R.id.games_overview_invitations_list);
+		
+		activesLayout = (RelativeLayout) findViewById(R.id.activesLayout);
+		invitesLayout = (RelativeLayout) findViewById(R.id.invitesLayout);
+		
+		invitesLayout.setVisibility(View.GONE);
+		
+		showActiveButton = (Button) findViewById(R.id.games_overview_active_games_button);
+		showInvitesButton = (Button) findViewById(R.id.games_overview_invites_button);
+		
 		games = new ArrayList<Game>();
 		invites = new ArrayList<Game>();
 
@@ -98,12 +114,9 @@ public class GamesOverview extends Activity {
 				Log.d("SnapHunt_GamesOverview","view: "+ view + " pos: "+ position + "id: " + id);
 				Log.d("SnapHunt_GamesOverview","gameID: " + games.get(position).getId());
 
-
 				gameId = games.get(position).getId();
 				judgeCheck();
-
 			}
-
 		});
 
 		gameInvitesView.setOnItemClickListener(new OnItemClickListener() {
@@ -117,10 +130,22 @@ public class GamesOverview extends Activity {
 				gameId = invites.get(position).getId();
 				confirmPlayer();
 			}
-
-
-
 		});
+		showActiveButton.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				activesLayout.setVisibility(View.VISIBLE);
+				invitesLayout.setVisibility(View.GONE);
+			}
+		});
+		showInvitesButton.setOnClickListener(new OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				activesLayout.setVisibility(View.GONE);
+				invitesLayout.setVisibility(View.VISIBLE);				
+			}
+		});
+		
 	}
 
 	private void confirmPlayerResult() {
