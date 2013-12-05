@@ -45,9 +45,9 @@ public class GamesOverview extends Activity {
 	protected ListView gameView;
 	protected ListView gameInvitesView;
 
-	protected RelativeLayout activesLayout;
-	protected RelativeLayout invitesLayout;
-	
+	protected LinearLayout activesLayout;
+	protected LinearLayout invitesLayout;
+
 	protected Button showActiveButton;
 	protected Button showInvitesButton;
 	protected int uid;
@@ -73,15 +73,15 @@ public class GamesOverview extends Activity {
 		queue = Volley.newRequestQueue(this);
 		gameView = (ListView) findViewById(R.id.games_overvew_games_list);
 		gameInvitesView = (ListView) findViewById(R.id.games_overview_invitations_list);
-		
-		activesLayout = (RelativeLayout) findViewById(R.id.activesLayout);
-		invitesLayout = (RelativeLayout) findViewById(R.id.invitesLayout);
-		
+
+		activesLayout = (LinearLayout) findViewById(R.id.activesLayout);
+		invitesLayout = (LinearLayout) findViewById(R.id.invitesLayout);
+
 		invitesLayout.setVisibility(View.GONE);
-		
+
 		showActiveButton = (Button) findViewById(R.id.games_overview_active_games_button);
 		showInvitesButton = (Button) findViewById(R.id.games_overview_invites_button);
-		
+
 		games = new ArrayList<Game>();
 		invites = new ArrayList<Game>();
 
@@ -131,21 +131,21 @@ public class GamesOverview extends Activity {
 				confirmPlayer();
 			}
 		});
-		showActiveButton.setOnClickListener(new OnClickListener() {			
+		showActiveButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				activesLayout.setVisibility(View.VISIBLE);
 				invitesLayout.setVisibility(View.GONE);
 			}
 		});
-		showInvitesButton.setOnClickListener(new OnClickListener() {			
+		showInvitesButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				activesLayout.setVisibility(View.GONE);
-				invitesLayout.setVisibility(View.VISIBLE);				
+				invitesLayout.setVisibility(View.VISIBLE);
 			}
 		});
-		
+
 	}
 
 	private void confirmPlayerResult() {
